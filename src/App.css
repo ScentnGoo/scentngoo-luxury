@@ -1418,3 +1418,16 @@ body {
     margin-top: 20px;
   }
 }
+.actual-vending-machine {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.machine-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+  border: 3px solid rgba(255, 215, 0, 0.4);
+}
