@@ -196,27 +196,9 @@ function App() {
         <div className="container mx-auto px-6 py-20">
           <div className="product-hero">
             <div className="product-image-container">
-              <div className="vending-machine-display">
-                <div className="machine-frame">
-                  <div className="machine-screen">
-                    <div className="perfume-bottles">
-                      <div className="bottle-row">
-                        <div className="bottle gold"></div>
-                        <div className="bottle pink"></div>
-                        <div className="bottle triangle"></div>
-                        <div className="bottle black"></div>
-                        <div className="bottle blue"></div>
-                      </div>
-                      <div className="bottle-row">
-                        <div className="bottle gold"></div>
-                        <div className="bottle pink"></div>
-                        <div className="bottle triangle"></div>
-                        <div className="bottle black"></div>
-                        <div className="bottle blue"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+             <div className="actual-vending-machine">
+  <img src="https://imgur.com/a/WK6nyo9" alt="ScentNGoo Vending Machine" className="machine-photo" />
+</div>
               </div>
             </div>
             <div className="product-content">
