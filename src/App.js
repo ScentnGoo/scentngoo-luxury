@@ -116,7 +116,7 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
-          <img src="https://images.unsplash.com/photo-1575884344532-3a93810a682d" alt="Luxury Hotel London" className="hero-bg-image" />
+          <img src="https://i.imgur.com/TpNRLbp.jpg" alt="Luxury Hotel" className="hero-bg-image" />
           <div className="hero-overlay"></div>
         </div>
         <div className="container mx-auto px-6 hero-content">
