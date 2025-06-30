@@ -256,7 +256,7 @@ function App() {
               <div className="product-image-container">
                 <div className="vending-machine-image">
                   <img 
-                    src="https://i.imgur.com/WK6nyo9.jpg" 
+                    src="https://imgur.com/a/perfume-vending-machine-e7lrDB0" 
                     alt="ScentNGoo Luxury Perfume Vending Machine" 
                     className="machine-photo"
                   />
