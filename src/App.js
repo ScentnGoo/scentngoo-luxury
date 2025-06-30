@@ -260,10 +260,21 @@ function App() {
         <div className="container mx-auto px-6 py-20">
           <div className="product-showcase">
             <div className="product-hero">
-              <div className="product-image-container">
-                <div className="vending-machine-image">
-                  <div className="actual-vending-machine">
-  <img src="https://i.imgur.com/TpNRLbp.png" alt="ScentNGoo Vending Machine" className="machine-photo" />
+             <div className="product-image-container">
+  <img 
+    src="https://i.imgur.com/TpNRLbp.jpg" 
+    alt="ScentNGoo Vending Machine" 
+    style={{
+      width: '100%',
+      maxWidth: '400px',
+      height: 'auto',
+      borderRadius: '20px',
+      boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)',
+      border: '3px solid rgba(255, 215, 0, 0.4)',
+      display: 'block',
+      margin: '0 auto'
+    }}
+  />
 </div>
                 <div className="product-image-overlay">
                   <div className="feature-callout">
