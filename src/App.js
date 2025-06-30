@@ -103,7 +103,7 @@ function App() {
               <span className="logo-text">ScentNGoo</span>
     <span className="logo-text">ScentNGoo</span>
           </div>
-          <img src="https://i.imgur.com/TpNRLbp.jpg" alt="Vending Machine" style={{width:'200px', height:'auto'}} />
+          <img src="vending-machine.jpg.png" alt="Vending Machine" style={{width:'200px', height:'auto'}} />
             </div>
           </div>
           <nav className="hidden md:flex space-x-8">
@@ -119,7 +119,7 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
-          <img src="https://i.imgur.com/TpNRLbp.jpg" alt="Luxury Hotel" className="hero-bg-image" />
+          <img src="vending-machine.jpg.png" alt="Luxury Hotel" className="hero-bg-image" />
           <div className="hero-overlay"></div>
         </div>
         <div className="container mx-auto px-6 hero-content">
@@ -129,12 +129,12 @@ function App() {
               <span className="gradient-text"> Luxury Fragrance Empire</span>
             </h1>
             <div style={{textAlign: 'center', margin: '30px 0'}}>
-              <img src="https://i.imgur.com/TpNRLbp.jpg" alt="ScentNGoo Vending Machine" style={{maxWidth: '400px', width: '100%', height: 'auto', borderRadius: '15px', border: '3px solid gold'}} />
+              <img src="vending-machine.jpg.png" alt="ScentNGoo Vending Machine" style={{maxWidth: '400px', width: '100%', height: 'auto', borderRadius: '15px', border: '3px solid gold'}} />
             </div>
         <span className="gradient-text"> Luxury Fragrance Empire</span>
             </h1>
             <img 
-              src="https://i.imgur.com/TpNRLbp.jpg" 
+              src="vending-machine.jpg.png" 
               alt="ScentNGoo Machine" 
               style={{width: '300px', height: 'auto', borderRadius: '15px', margin: '20px 0'}}
             />
@@ -268,7 +268,7 @@ function App() {
             <div className="product-hero">
              <div className="product-image-container">
   <img 
-    src="https://i.imgur.com/TpNRLbp.jpg" 
+    src="vending-machine.jpg.png" 
     alt="ScentNGoo Vending Machine" 
     style={{
       width: '100%',
