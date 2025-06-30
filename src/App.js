@@ -101,6 +101,9 @@ function App() {
                 <div className="scent-sparkle"></div>
               </div>
               <span className="logo-text">ScentNGoo</span>
+    <span className="logo-text">ScentNGoo</span>
+          </div>
+          <img src="https://i.imgur.com/TpNRLbp.jpg" alt="Vending Machine" style={{width:'200px', height:'auto'}} />
             </div>
           </div>
           <nav className="hidden md:flex space-x-8">
