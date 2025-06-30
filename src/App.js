@@ -128,6 +128,9 @@ function App() {
               Transform Your Business Into A 
               <span className="gradient-text"> Luxury Fragrance Empire</span>
             </h1>
+            <div style={{textAlign: 'center', margin: '30px 0'}}>
+              <img src="https://i.imgur.com/TpNRLbp.jpg" alt="ScentNGoo Vending Machine" style={{maxWidth: '400px', width: '100%', height: 'auto', borderRadius: '15px', border: '3px solid gold'}} />
+            </div>
         <span className="gradient-text"> Luxury Fragrance Empire</span>
             </h1>
             <img 
