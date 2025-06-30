@@ -256,7 +256,7 @@ function App() {
               <div className="product-image-container">
                 <div className="vending-machine-image">
                   <div className="actual-vending-machine">
-  <img src="https://i.imgur.com/TpNRLbp.jpg" alt="ScentNGoo Vending Machine" className="machine-photo" />
+  <img src="https://i.imgur.com/TpNRLbp.png" alt="ScentNGoo Vending Machine" className="machine-photo" />
 </div>
                 <div className="product-image-overlay">
                   <div className="feature-callout">
