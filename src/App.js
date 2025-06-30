@@ -125,6 +125,13 @@ function App() {
               Transform Your Business Into A 
               <span className="gradient-text"> Luxury Fragrance Empire</span>
             </h1>
+        <span className="gradient-text"> Luxury Fragrance Empire</span>
+            </h1>
+            <img 
+              src="https://i.imgur.com/TpNRLbp.jpg" 
+              alt="ScentNGoo Machine" 
+              style={{width: '300px', height: 'auto', borderRadius: '15px', margin: '20px 0'}}
+            />
             <p className="hero-subtitle">
               Generate £2,000-£5,000+ monthly passive income with our premium 10-scent perfume vending machines. 
               Perfect for pubs, clubs, gyms & indoor venues. Monitor remotely with our smart app technology.
