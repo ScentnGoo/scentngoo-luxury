@@ -255,12 +255,9 @@ function App() {
             <div className="product-hero">
               <div className="product-image-container">
                 <div className="vending-machine-image">
-                  <img 
-                    src="https://imgur.com/a/perfume-vending-machine-e7lrDB0" 
-                    alt="ScentNGoo Luxury Perfume Vending Machine" 
-                    className="machine-photo"
-                  />
-                </div>
+                  <div className="actual-vending-machine">
+  <img src="https://i.imgur.com/TpNRLbp.jpg" alt="ScentNGoo Vending Machine" className="machine-photo" />
+</div>
                 <div className="product-image-overlay">
                   <div className="feature-callout">
                     <span className="callout-number">10</span>
