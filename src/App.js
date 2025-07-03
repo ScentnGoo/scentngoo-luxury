@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import vendingMachineImage from './vending-machine.jpg';
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
@@ -127,7 +128,7 @@ function App() {
             </h1>
             <div style={{textAlign: 'center', margin: '30px 0'}}>
               <img 
-                src="/vending-machine.jpg" 
+                src={vendingMachineImage} 
                 alt="ScentNGoo Vending Machine" 
                 style={{
                   maxWidth: '400px', 
@@ -268,7 +269,7 @@ function App() {
             <div className="product-hero">
               <div className="product-image-container">
                 <img 
-                  src="/vending-machine.jpg" 
+                  src={vendingMachineImage} 
                   alt="ScentNGoo Vending Machine" 
                   style={{
                     width: '100%',
@@ -424,7 +425,7 @@ function App() {
             <div className="invest-package">
               <div className="package-image">
                 <img 
-                  src="/vending-machine.jpg" 
+                  src={vendingMachineImage} 
                   alt="ScentNGoo Package" 
                   style={{
                     width: '100%',
@@ -586,7 +587,7 @@ function App() {
             
             <div className="cart-content">
               <div className="cart-item">
-                <img src="/vending-machine.jpg" alt="ScentNGoo System" className="cart-item-image" />
+                <img src={vendingMachineImage} alt="ScentNGoo System" className="cart-item-image" />
                 <div className="cart-item-details">
                   <h4>ScentNGoo Complete System</h4>
                   <ul>
