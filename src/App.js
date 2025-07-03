@@ -3,7 +3,6 @@ import './App.css';
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [showROICalculator, setShowROICalculator] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [roiInputs, setROIInputs] = useState({
@@ -72,14 +71,6 @@ function App() {
     };
   };
 
-  const nextTestimonial = () => {
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
   const handleROIInputChange = (field, value) => {
     setROIInputs(prev => ({
       ...prev,
@@ -103,13 +94,15 @@ function App() {
               <span className="logo-text">ScentNGoo</span>
             </div>
           </div>
-          <nav className="hidden md:flex space-x-8">
-            <a href="#opportunity" className="nav-link">Opportunity</a>
-            <a href="#product" className="nav-link">Product</a>
-            <a href="#testimonials" className="nav-link">Success Stories</a>
-            <a href="#invest" className="nav-link">Invest Now</a>
-          </nav>
-          <button className="cta-button-header" onClick={() => setShowCart(true)}>Get Started</button>
+          <div className="header-right">
+            <nav className="nav-menu">
+              <a href="#opportunity" className="nav-link">Opportunity</a>
+              <a href="#product" className="nav-link">Product</a>
+              <a href="#testimonials" className="nav-link">Success Stories</a>
+              <a href="#invest" className="nav-link">Invest Now</a>
+            </nav>
+            <button className="cta-button-header" onClick={() => setShowCart(true)}>Get Started</button>
+          </div>
         </div>
       </header>
 
@@ -318,10 +311,8 @@ function App() {
                 <div className="feature">
                   <div className="feature-icon">📊</div>
                   <div>
-                    <div>
-                      <h4>Real-Time Analytics</h4>
-                      <p>Monitor sales, inventory, and performance from anywhere with our mobile app</p>
-                    </div>
+                    <h4>Real-Time Analytics</h4>
+                    <p>Monitor sales, inventory, and performance from anywhere with our mobile app</p>
                   </div>
                 </div>
                 <div className="feature">
@@ -362,7 +353,7 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - All 3 visible */}
       <section id="testimonials" className="testimonials-section">
         <div className="container mx-auto px-6 py-20">
           <div className="section-header">
@@ -370,46 +361,34 @@ function App() {
             <p className="section-subtitle">Real businesses, real results, real profits</p>
           </div>
           
-          <div className="testimonial-slider">
-            <div className="testimonial-container">
-              <div className="testimonial-card active">
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="testimonial-card">
                 <div className="testimonial-header">
                   <div className="testimonial-avatar">
-                    <img src={`https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face`} alt={testimonials[activeTestimonial].name} />
+                    <div className="avatar-placeholder">
+                      <span className="avatar-initial">{testimonial.name.charAt(0)}</span>
+                    </div>
                   </div>
                   <div className="testimonial-info">
-                    <h4>{testimonials[activeTestimonial].name}</h4>
-                    <p>{testimonials[activeTestimonial].business}</p>
+                    <h4>{testimonial.name}</h4>
+                    <p>{testimonial.business}</p>
                     <div className="stars">
-                      {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                      {[...Array(testimonial.rating)].map((_, i) => (
                         <span key={i} className="star">⭐</span>
                       ))}
                     </div>
                   </div>
                   <div className="revenue-highlight">
-                    <span className="revenue-amount">{testimonials[activeTestimonial].revenue}</span>
+                    <span className="revenue-amount">{testimonial.revenue}</span>
                     <span className="revenue-label">Monthly Revenue</span>
                   </div>
                 </div>
                 <div className="testimonial-content">
-                  <p>"{testimonials[activeTestimonial].text}"</p>
+                  <p>"{testimonial.text}"</p>
                 </div>
               </div>
-            </div>
-            
-            <div className="testimonial-navigation">
-              <button className="nav-button prev" onClick={prevTestimonial}>‹</button>
-              <div className="testimonial-dots">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`dot ${index === activeTestimonial ? 'active' : ''}`}
-                    onClick={() => setActiveTestimonial(index)}
-                  />
-                ))}
-              </div>
-              <button className="nav-button next" onClick={nextTestimonial}>›</button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -484,8 +463,8 @@ function App() {
 
       {/* ROI Calculator Modal */}
       {showROICalculator && (
-        <div className="modal-overlay">
-          <div className="modal-content roi-modal">
+        <div className="modal-overlay" onClick={() => setShowROICalculator(false)}>
+          <div className="modal-content roi-modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowROICalculator(false)}>×</button>
             <h3>Calculate Your Custom ROI</h3>
             
@@ -581,8 +560,8 @@ function App() {
 
       {/* Cart Modal */}
       {showCart && (
-        <div className="modal-overlay">
-          <div className="modal-content cart-modal">
+        <div className="modal-overlay" onClick={() => setShowCart(false)}>
+          <div className="modal-content cart-modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowCart(false)}>×</button>
             <h3>Complete Your Investment</h3>
             
@@ -605,7 +584,11 @@ function App() {
               
               <div className="contact-form">
                 <h4>Contact Information</h4>
-                <form>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  alert('Thank you for your interest! We will contact you within 24 hours to discuss your investment.');
+                  setShowCart(false);
+                }}>
                   <div className="form-group">
                     <input type="text" placeholder="Full Name" required />
                   </div>
@@ -675,7 +658,7 @@ function App() {
             <div className="footer-section">
               <h4>Contact</h4>
               <p>📧 scentngoo@gmail.com</p>
-              <p>📞 +44 (0) 20 7946 0958</p>
+              <p>📞 +44 (0) 7366626260</p>
               <p>🌐 www.scentngoo.com</p>
             </div>
           </div>
