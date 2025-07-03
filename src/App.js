@@ -51,11 +51,11 @@ function App() {
 
   const calculateROI = () => {
     const location = locationMultipliers[roiInputs.location];
-    const dailyUsers = Math.floor(roiInputs.footTraffic * 0.15); // 15% conversion rate
+    const dailyUsers = Math.floor(roiInputs.footTraffic * 0.15);
     const dailyUses = dailyUsers * location.avgUses;
     const dailyRevenue = dailyUses * roiInputs.pricePerSpray * location.multiplier;
     const monthlyRevenue = dailyRevenue * roiInputs.operatingDays;
-    const monthlyProfit = monthlyRevenue * 0.75; // 75% profit margin
+    const monthlyProfit = monthlyRevenue * 0.75;
     const yearlyProfit = monthlyProfit * 12;
     const breakEvenMonths = 4999 / monthlyProfit;
     const roi = ((yearlyProfit - 4999) / 4999) * 100;
@@ -101,9 +101,6 @@ function App() {
                 <div className="scent-sparkle"></div>
               </div>
               <span className="logo-text">ScentNGoo</span>
-    <span className="logo-text">ScentNGoo</span>
-          </div>
-          <img src="vending-machine.jpg.png" alt="Vending Machine" style={{width:'200px', height:'auto'}} />
             </div>
           </div>
           <nav className="hidden md:flex space-x-8">
@@ -119,7 +116,7 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
-          <img src="vending-machine.jpg.png" alt="Luxury Hotel" className="hero-bg-image" />
+          <img src="https://images.unsplash.com/photo-1661422586023-681ea60507e2" alt="Luxury Hotel" className="hero-bg-image" />
           <div className="hero-overlay"></div>
         </div>
         <div className="container mx-auto px-6 hero-content">
@@ -129,15 +126,19 @@ function App() {
               <span className="gradient-text"> Luxury Fragrance Empire</span>
             </h1>
             <div style={{textAlign: 'center', margin: '30px 0'}}>
-              <img src="vending-machine.jpg.png" alt="ScentNGoo Vending Machine" style={{maxWidth: '400px', width: '100%', height: 'auto', borderRadius: '15px', border: '3px solid gold'}} />
+              <img 
+                src="/vending-machine.jpg" 
+                alt="ScentNGoo Vending Machine" 
+                style={{
+                  maxWidth: '400px', 
+                  width: '100%', 
+                  height: 'auto', 
+                  borderRadius: '15px', 
+                  border: '3px solid gold',
+                  boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)'
+                }} 
+              />
             </div>
-        <span className="gradient-text"> Luxury Fragrance Empire</span>
-            </h1>
-            <img 
-              src="vending-machine.jpg.png" 
-              alt="ScentNGoo Machine" 
-              style={{width: '300px', height: 'auto', borderRadius: '15px', margin: '20px 0'}}
-            />
             <p className="hero-subtitle">
               Generate £2,000-£5,000+ monthly passive income with our premium 10-scent perfume vending machines. 
               Perfect for pubs, clubs, gyms & indoor venues. Monitor remotely with our smart app technology.
@@ -210,7 +211,6 @@ function App() {
             </div>
           </div>
 
-          {/* Example Placements */}
           <div className="placement-examples">
             <h3>Perfect Placement Examples</h3>
             <div className="examples-grid">
@@ -266,94 +266,213 @@ function App() {
         <div className="container mx-auto px-6 py-20">
           <div className="product-showcase">
             <div className="product-hero">
-             <div className="product-image-container">
-  <img 
-    src="vending-machine.jpg.png" 
-    alt="ScentNGoo Vending Machine" 
-    style={{
-      width: '100%',
-      maxWidth: '400px',
-      height: 'auto',
-      borderRadius: '20px',
-      boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)',
-      border: '3px solid rgba(255, 215, 0, 0.4)',
-      display: 'block',
-      margin: '0 auto'
-    }}
-  />
-</div>
-                <div className="product-image-overlay">
-                  <div className="feature-callout">
-                    <span className="callout-number">10</span>
-                    <span className="callout-text">Premium Scents</span>
+              <div className="product-image-container">
+                <img 
+                  src="/vending-machine.jpg" 
+                  alt="ScentNGoo Vending Machine" 
+                  style={{
+                    width: '100%',
+                    maxWidth: '400px',
+                    height: 'auto',
+                    borderRadius: '20px',
+                    boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)',
+                    border: '3px solid rgba(255, 215, 0, 0.4)',
+                    display: 'block',
+                    margin: '0 auto'
+                  }}
+                />
+              </div>
+              <div className="product-image-overlay">
+                <div className="feature-callout">
+                  <span className="callout-number">10</span>
+                  <span className="callout-text">Premium Scents</span>
+                </div>
+                <div className="feature-callout">
+                  <span className="callout-icon">📱</span>
+                  <span className="callout-text">App Monitoring</span>
+                </div>
+              </div>
+            </div>
+            <div className="product-content">
+              <h2 className="product-title">The ScentNGoo Luxury Vending System</h2>
+              <p className="product-description">
+                State-of-the-art technology meets premium design. Our machines don't just dispense fragrance - 
+                they create an experience that customers crave and pay premium prices for.
+              </p>
+              
+              <div className="product-features">
+                <div className="feature">
+                  <div className="feature-icon">✨</div>
+                  <div>
+                    <h4>Premium LED Display</h4>
+                    <p>Stunning visual interface that attracts customers and showcases all 10 fragrances</p>
                   </div>
-                  <div className="feature-callout">
-                    <span className="callout-icon">📱</span>
-                    <span className="callout-text">App Monitoring</span>
+                </div>
+                <div className="feature">
+                  <div className="feature-icon">🔒</div>
+                  <div>
+                    <h4>Secure Payment System</h4>
+                    <p>Accepts cards, contactless, and mobile payments for maximum conversion</p>
+                  </div>
+                </div>
+                <div className="feature">
+                  <div className="feature-icon">📊</div>
+                  <div>
+                    <h4>Real-Time Analytics</h4>
+                    <p>Monitor sales, inventory, and performance from anywhere with our mobile app</p>
+                  </div>
+                </div>
+                <div className="feature">
+                  <div className="feature-icon">🛠️</div>
+                  <div>
+                    <h4>Minimal Maintenance</h4>
+                    <p>Self-cleaning nozzles and automated diagnostics ensure 99.9% uptime</p>
                   </div>
                 </div>
               </div>
-              <div className="product-content">
-                <h2 className="product-title">The ScentNGoo Luxury Vending System</h2>
-                <p className="product-description">
-                  State-of-the-art technology meets premium design. Our machines don't just dispense fragrance - 
-                  they create an experience that customers crave and pay premium prices for.
-                </p>
+
+              <div className="roi-calculator">
+                <h3>Your ROI Breakdown</h3>
+                <div className="roi-grid">
+                  <div className="roi-item">
+                    <span className="roi-label">Initial Investment</span>
+                    <span className="roi-value">£4,999</span>
+                  </div>
+                  <div className="roi-item">
+                    <span className="roi-label">Average Monthly Revenue</span>
+                    <span className="roi-value">£2,800</span>
+                  </div>
+                  <div className="roi-item">
+                    <span className="roi-label">Break-even Period</span>
+                    <span className="roi-value">1.8 Months</span>
+                  </div>
+                  <div className="roi-item highlight">
+                    <span className="roi-label">Annual Profit</span>
+                    <span className="roi-value">£28,600+</span>
+                  </div>
+                </div>
+                <button className="roi-calc-button" onClick={() => setShowROICalculator(true)}>
+                  Calculate Your Custom ROI
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="testimonials-section">
+        <div className="container mx-auto px-6 py-20">
+          <div className="section-header">
+            <h2 className="section-title">Success Stories From Our Partners</h2>
+            <p className="section-subtitle">Real businesses, real results, real profits</p>
+          </div>
+          
+          <div className="testimonial-slider">
+            <div className="testimonial-container">
+              <div className="testimonial-card active">
+                <div className="testimonial-header">
+                  <div className="testimonial-avatar">
+                    <img src={`https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face`} alt={testimonials[activeTestimonial].name} />
+                  </div>
+                  <div className="testimonial-info">
+                    <h4>{testimonials[activeTestimonial].name}</h4>
+                    <p>{testimonials[activeTestimonial].business}</p>
+                    <div className="stars">
+                      {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                        <span key={i} className="star">⭐</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="revenue-highlight">
+                    <span className="revenue-amount">{testimonials[activeTestimonial].revenue}</span>
+                    <span className="revenue-label">Monthly Revenue</span>
+                  </div>
+                </div>
+                <div className="testimonial-content">
+                  <p>"{testimonials[activeTestimonial].text}"</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="testimonial-navigation">
+              <button className="nav-button prev" onClick={prevTestimonial}>‹</button>
+              <div className="testimonial-dots">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`dot ${index === activeTestimonial ? 'active' : ''}`}
+                    onClick={() => setActiveTestimonial(index)}
+                  />
+                ))}
+              </div>
+              <button className="nav-button next" onClick={nextTestimonial}>›</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Investment Section */}
+      <section id="invest" className="invest-section">
+        <div className="container mx-auto px-6 py-20">
+          <div className="invest-content">
+            <div className="invest-header">
+              <h2 className="invest-title">Start Your Fragrance Empire Today</h2>
+              <p className="invest-subtitle">Complete package includes machine, installation, training, and 1-year warranty</p>
+            </div>
+            
+            <div className="invest-package">
+              <div className="package-image">
+                <img 
+                  src="/vending-machine.jpg" 
+                  alt="ScentNGoo Package" 
+                  style={{
+                    width: '100%',
+                    maxWidth: '300px',
+                    height: 'auto',
+                    borderRadius: '15px',
+                    boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)'
+                  }}
+                />
+              </div>
+              
+              <div className="package-details">
+                <h3>Complete ScentNGoo System</h3>
+                <div className="package-features">
+                  <div className="feature">✅ Premium vending machine with 10 scent capacity</div>
+                  <div className="feature">✅ Professional installation & setup</div>
+                  <div className="feature">✅ Smart app monitoring system</div>
+                  <div className="feature">✅ Initial fragrance starter pack</div>
+                  <div className="feature">✅ Comprehensive training program</div>
+                  <div className="feature">✅ 1-year warranty & support</div>
+                  <div className="feature">✅ Marketing materials & signage</div>
+                </div>
                 
-                <div className="product-features">
-                  <div className="feature">
-                    <div className="feature-icon">✨</div>
-                    <div>
-                      <h4>Premium LED Display</h4>
-                      <p>Stunning visual interface that attracts customers and showcases all 10 fragrances</p>
+                <div className="pricing">
+                  <div className="price-breakdown">
+                    <div className="price-item">
+                      <span className="price-label">Machine & Installation</span>
+                      <span className="price-value">£4,299</span>
                     </div>
-                  </div>
-                  <div className="feature">
-                    <div className="feature-icon">🔒</div>
-                    <div>
-                      <h4>Secure Payment System</h4>
-                      <p>Accepts cards, contactless, and mobile payments for maximum conversion</p>
+                    <div className="price-item">
+                      <span className="price-label">Starter Pack & Training</span>
+                      <span className="price-value">£700</span>
                     </div>
-                  </div>
-                  <div className="feature">
-                    <div className="feature-icon">📊</div>
-                    <div>
-                      <h4>Real-Time Analytics</h4>
-                      <p>Monitor sales, inventory, and performance from anywhere with our mobile app</p>
-                    </div>
-                  </div>
-                  <div className="feature">
-                    <div className="feature-icon">🛠️</div>
-                    <div>
-                      <h4>Minimal Maintenance</h4>
-                      <p>Self-cleaning nozzles and automated diagnostics ensure 99.9% uptime</p>
+                    <div className="price-total">
+                      <span className="price-label">Total Investment</span>
+                      <span className="price-value">£4,999</span>
                     </div>
                   </div>
                 </div>
-
-                <div className="roi-calculator">
-                  <h3>Your ROI Breakdown</h3>
-                  <div className="roi-grid">
-                    <div className="roi-item">
-                      <span className="roi-label">Initial Investment</span>
-                      <span className="roi-value">£4,999</span>
-                    </div>
-                    <div className="roi-item">
-                      <span className="roi-label">Average Monthly Revenue</span>
-                      <span className="roi-value">£2,800</span>
-                    </div>
-                    <div className="roi-item">
-                      <span className="roi-label">Break-even Period</span>
-                      <span className="roi-value">1.8 Months</span>
-                    </div>
-                    <div className="roi-item highlight">
-                      <span className="roi-label">Annual Profit</span>
-                      <span className="roi-value">£28,600+</span>
-                    </div>
-                  </div>
-                  <button className="roi-calc-button" onClick={() => setShowROICalculator(true)}>
-                    Calculate Your Custom ROI
-                  </button>
+                
+                <button className="invest-cta-button" onClick={() => setShowCart(true)}>
+                  Secure Your Territory Now
+                </button>
+                
+                <div className="guarantee">
+                  <p>🛡️ 30-day money-back guarantee</p>
+                  <p>📞 24/7 support & maintenance</p>
+                  <p>📈 ROI typically achieved in 3-6 months</p>
                 </div>
               </div>
             </div>
@@ -361,7 +480,160 @@ function App() {
         </div>
       </section>
 
-      {/* ... rest of the components remain the same ... */}
+      {/* ROI Calculator Modal */}
+      {showROICalculator && (
+        <div className="modal-overlay">
+          <div className="modal-content roi-modal">
+            <button className="modal-close" onClick={() => setShowROICalculator(false)}>×</button>
+            <h3>Calculate Your Custom ROI</h3>
+            
+            <div className="roi-inputs">
+              <div className="input-group">
+                <label>Location Type</label>
+                <select
+                  value={roiInputs.location}
+                  onChange={(e) => handleROIInputChange('location', e.target.value)}
+                >
+                  <option value="gym">Fitness Center</option>
+                  <option value="pub">Pub/Bar</option>
+                  <option value="club">Nightclub</option>
+                  <option value="restaurant">Restaurant</option>
+                  <option value="hotel">Hotel</option>
+                </select>
+              </div>
+              
+              <div className="input-group">
+                <label>Daily Foot Traffic</label>
+                <input
+                  type="number"
+                  value={roiInputs.footTraffic}
+                  onChange={(e) => handleROIInputChange('footTraffic', parseInt(e.target.value))}
+                  min="50"
+                  max="2000"
+                />
+              </div>
+              
+              <div className="input-group">
+                <label>Price per Spray (£)</label>
+                <input
+                  type="number"
+                  value={roiInputs.pricePerSpray}
+                  onChange={(e) => handleROIInputChange('pricePerSpray', parseFloat(e.target.value))}
+                  min="1"
+                  max="5"
+                  step="0.5"
+                />
+              </div>
+              
+              <div className="input-group">
+                <label>Operating Days per Month</label>
+                <input
+                  type="number"
+                  value={roiInputs.operatingDays}
+                  onChange={(e) => handleROIInputChange('operatingDays', parseInt(e.target.value))}
+                  min="20"
+                  max="31"
+                />
+              </div>
+            </div>
+            
+            <div className="roi-results">
+              <h4>Your Projected Returns</h4>
+              <div className="results-grid">
+                <div className="result-item">
+                  <span className="result-label">Daily Users</span>
+                  <span className="result-value">{roiResults.dailyUsers}</span>
+                </div>
+                <div className="result-item">
+                  <span className="result-label">Daily Revenue</span>
+                  <span className="result-value">£{roiResults.dailyRevenue}</span>
+                </div>
+                <div className="result-item">
+                  <span className="result-label">Monthly Revenue</span>
+                  <span className="result-value">£{roiResults.monthlyRevenue}</span>
+                </div>
+                <div className="result-item">
+                  <span className="result-label">Monthly Profit</span>
+                  <span className="result-value">£{roiResults.monthlyProfit}</span>
+                </div>
+                <div className="result-item highlight">
+                  <span className="result-label">Annual Profit</span>
+                  <span className="result-value">£{roiResults.yearlyProfit}</span>
+                </div>
+                <div className="result-item highlight">
+                  <span className="result-label">Break-even</span>
+                  <span className="result-value">{roiResults.breakEvenMonths} months</span>
+                </div>
+              </div>
+            </div>
+            
+            <button className="roi-invest-button" onClick={() => {
+              setShowROICalculator(false);
+              setShowCart(true);
+            }}>
+              Invest Now - £4,999
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Cart Modal */}
+      {showCart && (
+        <div className="modal-overlay">
+          <div className="modal-content cart-modal">
+            <button className="modal-close" onClick={() => setShowCart(false)}>×</button>
+            <h3>Complete Your Investment</h3>
+            
+            <div className="cart-content">
+              <div className="cart-item">
+                <img src="/vending-machine.jpg" alt="ScentNGoo System" className="cart-item-image" />
+                <div className="cart-item-details">
+                  <h4>ScentNGoo Complete System</h4>
+                  <ul>
+                    <li>Premium 10-scent vending machine</li>
+                    <li>Professional installation</li>
+                    <li>Smart app monitoring</li>
+                    <li>Initial fragrance starter pack</li>
+                    <li>Training & support</li>
+                    <li>1-year warranty</li>
+                  </ul>
+                  <div className="cart-price">£4,999</div>
+                </div>
+              </div>
+              
+              <div className="contact-form">
+                <h4>Contact Information</h4>
+                <form>
+                  <div className="form-group">
+                    <input type="text" placeholder="Full Name" required />
+                  </div>
+                  <div className="form-group">
+                    <input type="email" placeholder="Email Address" required />
+                  </div>
+                  <div className="form-group">
+                    <input type="tel" placeholder="Phone Number" required />
+                  </div>
+                  <div className="form-group">
+                    <input type="text" placeholder="Business Name" required />
+                  </div>
+                  <div className="form-group">
+                    <textarea placeholder="Preferred Installation Location" rows="3"></textarea>
+                  </div>
+                  <button type="submit" className="submit-button">
+                    Secure Your Investment - £4,999
+                  </button>
+                </form>
+              </div>
+            </div>
+            
+            <div className="cart-footer">
+              <p>🔒 Secure payment processing</p>
+              <p>📞 Our team will contact you within 24 hours</p>
+              <p>⚡ Installation typically scheduled within 2 weeks</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="footer">
