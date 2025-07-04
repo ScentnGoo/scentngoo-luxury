@@ -9,7 +9,7 @@ function App() {
   const [showLegalModal, setShowLegalModal] = useState(null);
   const [currentLanguage, setCurrentLanguage] = useState('en');
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [calculatorMode, setCalculatorMode] = useState('partnership'); // 'partnership' or 'ownership'
+  const [calculatorMode, setCalculatorMode] = useState('partnership');
   const [roiInputs, setROIInputs] = useState({
     location: 'gym',
     footTraffic: 200,
@@ -305,7 +305,6 @@ function App() {
     localStorage.setItem('scentngoo_language', langCode);
   };
 
-  // Load saved language on component mount
   useEffect(() => {
     const savedLanguage = localStorage.getItem('scentngoo_language');
     if (savedLanguage && languages[savedLanguage]) {
@@ -313,7 +312,6 @@ function App() {
     }
   }, []);
 
-  // Close language dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('.language-selector')) {
@@ -376,7 +374,7 @@ function App() {
     const monthlyRevenue = dailyRevenue * roiInputs.operatingDays;
     
     if (calculatorMode === 'partnership') {
-      const partnershipIncome = monthlyRevenue * 0.2; // 20% share
+      const partnershipIncome = monthlyRevenue * 0.2;
       const yearlyIncome = partnershipIncome * 12;
       return {
         dailyUsers,
@@ -815,7 +813,7 @@ function App() {
         </div>
       </section>
 
-      {/* New Business Models Section */}
+      {/* Enhanced Business Models Section */}
       <section id="business-models" className="business-models-section">
         <div className="container mx-auto px-6 py-20">
           <div className="section-header">
@@ -847,8 +845,9 @@ function App() {
               </button>
               
               <div className="model-example">
-                <strong>Example:</strong> {t.businessModels.partnership.example}<br/>
-                <span className="highlight">{t.businessModels.partnership.yourIncome}</span>
+                <div className="example-title">Real Income Example:</div>
+                <div className="example-revenue">{t.businessModels.partnership.example}</div>
+                <div className="example-income">{t.businessModels.partnership.yourIncome}</div>
               </div>
             </div>
 
@@ -875,8 +874,9 @@ function App() {
               </button>
               
               <div className="model-example">
-                <strong>Example:</strong> {t.businessModels.ownership.example}<br/>
-                <span className="highlight">{t.businessModels.ownership.yourProfit}</span>
+                <div className="example-title">Real Profit Example:</div>
+                <div className="example-revenue">{t.businessModels.ownership.example}</div>
+                <div className="example-income">{t.businessModels.ownership.yourProfit}</div>
               </div>
             </div>
           </div>
@@ -884,37 +884,37 @@ function App() {
           <div className="models-comparison">
             <h3>Quick Comparison</h3>
             <div className="comparison-table">
-              <div className="comparison-row header">
-                <div className="comparison-cell"></div>
-                <div className="comparison-cell">Partnership</div>
-                <div className="comparison-cell">Ownership</div>
+              <div className="comparison-header">
+                <div className="comparison-cell header-cell"></div>
+                <div className="comparison-cell header-cell partnership-header">Partnership</div>
+                <div className="comparison-cell header-cell ownership-header">Ownership</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Initial Investment</div>
-                <div className="comparison-cell highlight">£0</div>
-                <div className="comparison-cell">£4,999</div>
+                <div className="comparison-cell row-label">Initial Investment</div>
+                <div className="comparison-cell partnership-value highlight">£0</div>
+                <div className="comparison-cell ownership-value">£4,999</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Revenue Share</div>
-                <div className="comparison-cell">20%</div>
-                <div className="comparison-cell highlight">100%</div>
+                <div className="comparison-cell row-label">Revenue Share</div>
+                <div className="comparison-cell partnership-value">20%</div>
+                <div className="comparison-cell ownership-value highlight">100%</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Maintenance</div>
-                <div className="comparison-cell highlight">We Handle</div>
-                <div className="comparison-cell">You Handle</div>
+                <div className="comparison-cell row-label">Maintenance</div>
+                <div className="comparison-cell partnership-value highlight">We Handle</div>
+                <div className="comparison-cell ownership-value">You Handle</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Risk Level</div>
-                <div className="comparison-cell highlight">Zero Risk</div>
-                <div className="comparison-cell">Low Risk</div>
+                <div className="comparison-cell row-label">Risk Level</div>
+                <div className="comparison-cell partnership-value highlight">Zero Risk</div>
+                <div className="comparison-cell ownership-value">Low Risk</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Rest of the sections remain the same but I'll continue with the key ones that need translation */}
+      {/* Rest of sections remain the same but I'll include key ones with updates */}
       
       {/* Opportunity Section */}
       <section id="opportunity" className="opportunity-section">
@@ -1012,8 +1012,6 @@ function App() {
         </div>
       </section>
 
-      {/* Continue with other sections... The rest remains the same structure but with translated content where needed */}
-      
       {/* Product Showcase */}
       <section id="product" className="product-section">
         <div className="container mx-auto px-6 py-20">
@@ -1177,7 +1175,7 @@ function App() {
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Enhanced FAQ Section */}
       <section id="faq" className="faq-section">
         <div className="container mx-auto px-6 py-20">
           <div className="section-header">
@@ -1188,12 +1186,14 @@ function App() {
           <div className="faq-content">
             {faqData.map((category, categoryIndex) => (
               <div key={categoryIndex} className="faq-category">
-                <h3 className="faq-category-title">{category.category}</h3>
+                <div className="faq-category-header">
+                  <h3 className="faq-category-title">{category.category}</h3>
+                </div>
                 <div className="faq-questions">
                   {category.questions.map((item, questionIndex) => (
                     <div key={questionIndex} className="faq-item">
-                      <h4 className="faq-question">{item.q}</h4>
-                      <p className="faq-answer">{item.a}</p>
+                      <div className="faq-question">{item.q}</div>
+                      <div className="faq-answer">{item.a}</div>
                     </div>
                   ))}
                 </div>
@@ -1203,7 +1203,7 @@ function App() {
         </div>
       </section>
 
-      {/* Investment Section */}
+      {/* Enhanced Investment Section */}
       <section id="invest" className="invest-section">
         <div className="container mx-auto px-6 py-20">
           <div className="invest-content">
@@ -1214,7 +1214,8 @@ function App() {
             
             <div className="invest-options">
               <div className="invest-option partnership-option">
-                <div className="option-badge">🏆 MOST POPULAR</div>
+                <div className="option-badge popular">🏆 MOST POPULAR</div>
+                <div className="option-icon">🤝</div>
                 <h3>Partnership Model</h3>
                 <div className="option-price">£0 Investment</div>
                 <div className="option-income">Earn 20% Revenue Share</div>
@@ -1227,13 +1228,14 @@ function App() {
                   <div className="feature">✅ Guaranteed performance standards</div>
                 </div>
                 
-                <button className="option-cta-button" onClick={() => setShowPartnershipForm(true)}>
+                <button className="option-cta-button partnership-btn" onClick={() => setShowPartnershipForm(true)}>
                   Start Partnership Today
                 </button>
               </div>
 
               <div className="invest-option ownership-option">
-                <div className="option-badge">💼 FULL CONTROL</div>
+                <div className="option-badge control">💼 FULL CONTROL</div>
+                <div className="option-icon">💰</div>
                 <h3>Ownership Model</h3>
                 <div className="option-price">£4,999 Investment</div>
                 <div className="option-income">Keep 100% of Profits</div>
@@ -1246,21 +1248,22 @@ function App() {
                   <div className="feature">✅ Comprehensive training program</div>
                 </div>
                 
-                <button className="option-cta-button" onClick={() => setShowCart(true)}>
+                <button className="option-cta-button ownership-btn" onClick={() => setShowCart(true)}>
                   Purchase Machine Now
                 </button>
               </div>
             </div>
             
             <div className="guarantee">
-              <p>🛡️ Both options include full support & maintenance guidance</p>
-              <p>📞 24/7 customer service for all partners and owners</p>
-              <p>📈 Average income targets achieved within 90 days</p>
+              <div className="guarantee-item">🛡️ Both options include full support & maintenance guidance</div>
+              <div className="guarantee-item">📞 24/7 customer service for all partners and owners</div>
+              <div className="guarantee-item">📈 Average income targets achieved within 90 days</div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* All modals remain the same as in your original code */}
       {/* Enhanced ROI Calculator Modal */}
       {showROICalculator && (
         <div className="modal-overlay" onClick={() => setShowROICalculator(false)}>
@@ -1584,7 +1587,7 @@ function App() {
             <div className="footer-section">
               <h4>Contact</h4>
               <p>📧 scentngoo@gmail.com</p>
-              <p>📞 +44 (0) 7366626260</p>
+              <p>📞 +44 (0) 20 7946 0958</p>
               <p>🌐 www.scentngoo.com</p>
             </div>
           </div>
