@@ -5,6 +5,7 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [showROICalculator, setShowROICalculator] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [showLegalModal, setShowLegalModal] = useState(null);
   const [roiInputs, setROIInputs] = useState({
     location: 'gym',
     footTraffic: 200,
@@ -78,7 +79,249 @@ function App() {
     }));
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const roiResults = calculateROI();
+
+  const legalContent = {
+    terms: {
+      title: "Terms of Service",
+      content: `
+        <h3>TERMS OF SERVICE - ScentNGoo Ltd</h3>
+        
+        <h4>1. COMPANY INFORMATION</h4>
+        <p>ScentNGoo Ltd, UK Registered Company<br/>
+        Email: scentngoo@gmail.com<br/>
+        Phone: +44 (0) 20 7946 0958</p>
+
+        <h4>2. CONSUMER RIGHTS (UK)</h4>
+        <p>Under the Consumer Rights Act 2015, you have the right to:</p>
+        <ul>
+          <li>Receive goods that match their description</li>
+          <li>14-day cooling-off period for distance sales</li>
+          <li>Repair, replacement, or refund for faulty goods</li>
+          <li>Protection against unfair terms</li>
+        </ul>
+
+        <h4>3. VENDING MACHINE INVESTMENT</h4>
+        <ul>
+          <li>£4,999 investment includes machine, installation, and training</li>
+          <li>1-year manufacturer warranty on hardware</li>
+          <li>30-day money-back guarantee</li>
+          <li>ROI projections are estimates based on average performance</li>
+          <li>Actual returns may vary based on location and management</li>
+        </ul>
+
+        <h4>4. INSTALLATION & LOCATION</h4>
+        <ul>
+          <li>Professional installation within 2-4 weeks of order</li>
+          <li>Customer must secure venue permissions</li>
+          <li>Installation location must meet technical requirements</li>
+          <li>Additional charges may apply for remote locations</li>
+        </ul>
+
+        <h4>5. LIABILITY</h4>
+        <p>Our liability is limited in accordance with UK Consumer Rights Act 2015. We provide comprehensive business insurance guidance and require customers to maintain appropriate commercial insurance.</p>
+
+        <h4>6. GOVERNING LAW</h4>
+        <p>These terms are governed by English law and subject to the exclusive jurisdiction of English courts.</p>
+      `
+    },
+    privacy: {
+      title: "Privacy Policy",
+      content: `
+        <h3>PRIVACY POLICY - ScentNGoo Ltd</h3>
+        
+        <h4>1. DATA CONTROLLER</h4>
+        <p>ScentNGoo Ltd processes your personal data in accordance with UK GDPR and the Data Protection Act 2018.</p>
+
+        <h4>2. DATA WE COLLECT</h4>
+        <ul>
+          <li>Contact information (name, email, phone number)</li>
+          <li>Business details for investment processing</li>
+          <li>Location preferences and requirements</li>
+          <li>Website analytics data (anonymized)</li>
+          <li>Communication records for support purposes</li>
+        </ul>
+
+        <h4>3. LEGAL BASIS FOR PROCESSING</h4>
+        <ul>
+          <li><strong>Contract performance:</strong> Processing your investment and service delivery</li>
+          <li><strong>Legitimate interests:</strong> Customer support, business development</li>
+          <li><strong>Consent:</strong> Marketing communications and newsletters</li>
+          <li><strong>Legal obligation:</strong> Tax records and compliance</li>
+        </ul>
+
+        <h4>4. YOUR RIGHTS UNDER UK GDPR</h4>
+        <ul>
+          <li>Right to access your personal data</li>
+          <li>Right to rectification of incorrect data</li>
+          <li>Right to erasure ('right to be forgotten')</li>
+          <li>Right to data portability</li>
+          <li>Right to object to processing</li>
+          <li>Right to withdraw consent</li>
+        </ul>
+
+        <h4>5. DATA RETENTION</h4>
+        <ul>
+          <li>Customer and transaction data: 7 years (HMRC requirements)</li>
+          <li>Marketing data: Until consent is withdrawn</li>
+          <li>Support records: 3 years after case closure</li>
+        </ul>
+
+        <h4>6. COOKIES AND TRACKING</h4>
+        <ul>
+          <li>Essential cookies for website functionality</li>
+          <li>Analytics cookies for website improvement (Google Analytics)</li>
+          <li>Marketing cookies with explicit consent</li>
+        </ul>
+
+        <h4>7. CONTACT FOR DATA MATTERS</h4>
+        <p>For any data protection queries, contact: scentngoo@gmail.com</p>
+      `
+    },
+    refund: {
+      title: "Refund Policy",
+      content: `
+        <h3>REFUND POLICY - ScentNGoo Ltd</h3>
+        
+        <h4>1. 30-DAY MONEY-BACK GUARANTEE</h4>
+        <ul>
+          <li>Full refund available within 30 days of delivery</li>
+          <li>Machine must be returned in original condition</li>
+          <li>Customer responsible for return shipping costs</li>
+          <li>Refund processed within 14 days of return receipt</li>
+        </ul>
+
+        <h4>2. CONSUMER RIGHTS ACT 2015</h4>
+        <ul>
+          <li>14-day cooling-off period for distance sales</li>
+          <li>Right to cancel without giving any reason</li>
+          <li>Full refund including original delivery costs</li>
+          <li>Cancellation must be in writing</li>
+        </ul>
+
+        <h4>3. WARRANTY CLAIMS</h4>
+        <ul>
+          <li>1-year comprehensive hardware warranty</li>
+          <li>Free repair or replacement for manufacturing defects</li>
+          <li>On-site technical support included</li>
+          <li>Excludes damage from misuse or negligence</li>
+        </ul>
+
+        <h4>4. REFUND PROCESS</h4>
+        <ol>
+          <li>Contact scentngoo@gmail.com with your order details</li>
+          <li>Receive return authorization and instructions</li>
+          <li>Package machine securely for return shipment</li>
+          <li>Refund processed upon inspection</li>
+        </ol>
+
+        <h4>5. EXCLUSIONS</h4>
+        <ul>
+          <li>Installation costs (if service completed)</li>
+          <li>Consumable items (fragrances, supplies)</li>
+          <li>Revenue losses or business interruption</li>
+          <li>Damage from normal wear and tear</li>
+        </ul>
+
+        <h4>6. DISPUTE RESOLUTION</h4>
+        <p>Any disputes will be handled through UK consumer protection services and Alternative Dispute Resolution (ADR) schemes where applicable.</p>
+      `
+    }
+  };
+
+  const faqData = [
+    {
+      category: "Investment & Returns",
+      questions: [
+        {
+          q: "Is the £4,999 investment guaranteed to make money?",
+          a: "ROI projections are estimates based on average performance across similar locations. Actual results vary depending on location foot traffic, pricing strategy, and management. We provide comprehensive training and support to maximize your success."
+        },
+        {
+          q: "What exactly is included in the £4,999 investment?",
+          a: "Your investment includes: Premium 10-scent vending machine, professional installation, comprehensive training program, starter fragrance pack, mobile app setup, 1-year warranty, ongoing technical support, and marketing materials."
+        },
+        {
+          q: "How quickly can I expect to see returns?",
+          a: "Most customers break even within 3-6 months. High-traffic locations often see positive returns within 6-8 weeks. We provide detailed location analysis to optimize your ROI potential."
+        },
+        {
+          q: "Can I purchase multiple machines?",
+          a: "Absolutely! We offer volume discounts for multiple machine purchases. Contact us for bulk pricing and territory planning assistance."
+        }
+      ]
+    },
+    {
+      category: "Installation & Operation",
+      questions: [
+        {
+          q: "How long does installation take?",
+          a: "Professional installation typically takes 2-4 hours. Our certified technicians handle all setup, calibration, and testing. You'll receive hands-on training immediately after installation."
+        },
+        {
+          q: "Do I need planning permission or special licenses?",
+          a: "Generally, no planning permission is required for indoor vending machines. However, you should check with your local council and ensure you have venue owner permission. We provide guidance on all regulatory requirements."
+        },
+        {
+          q: "What are the power and space requirements?",
+          a: "The machine requires: Standard UK 3-pin electrical outlet (13A), minimum 2m x 1m floor space, and reasonable ambient temperature (10-30°C). Full technical specifications provided upon order."
+        },
+        {
+          q: "How do I restock the fragrances?",
+          a: "Restocking is simple! Our mobile app alerts you when levels are low. Fragrance refills are delivered directly to your location. Each refill takes about 10 minutes to complete."
+        }
+      ]
+    },
+    {
+      category: "Technical Support",
+      questions: [
+        {
+          q: "What if the machine breaks down?",
+          a: "Your 1-year warranty covers all repairs and replacement parts. We offer 24/7 phone support and can arrange on-site visits within 48 hours for major issues. Most problems can be resolved remotely via our smart diagnostic system."
+        },
+        {
+          q: "How do I monitor sales and performance?",
+          a: "Our proprietary mobile app provides real-time data including: daily sales figures, inventory levels, popular fragrances, customer usage patterns, and maintenance alerts. All data is automatically synced and backed up."
+        },
+        {
+          q: "What ongoing maintenance is required?",
+          a: "Minimal maintenance required! The machine features self-cleaning nozzles and automated diagnostics. Monthly tasks include: refilling fragrances, wiping down exterior, and checking supply levels. Detailed maintenance schedule provided."
+        },
+        {
+          q: "Is training provided?",
+          a: "Comprehensive training included! You'll receive: on-site installation training, mobile app tutorial, maintenance guidance, business optimization tips, and ongoing support. Additional training sessions available if needed."
+        }
+      ]
+    },
+    {
+      category: "Business Questions",
+      questions: [
+        {
+          q: "What are the ongoing operational costs?",
+          a: "Primary ongoing costs are fragrance refills (£50-80/month depending on usage) and minimal electricity (approximately £5-10/month). Optional services include extended warranty and premium support packages."
+        },
+        {
+          q: "How do I choose the best location?",
+          a: "We provide location analysis consulting! Ideal locations include: fitness centers, upscale pubs, nightclubs, hotels, and premium restaurants. We help evaluate foot traffic, demographics, and revenue potential."
+        },
+        {
+          q: "What payment methods does the machine accept?",
+          a: "The machine accepts: contactless cards, chip & PIN, mobile payments (Apple Pay, Google Pay), and can be configured for cash payments. All transactions are processed securely with full compliance."
+        },
+        {
+          q: "Can I customize the fragrance selection?",
+          a: "Yes! While we provide a premium starter selection, you can customize fragrances based on your location's preferences. We offer over 50 premium fragrances and provide sales data to optimize your selection."
+        }
+      ]
+    }
+  ];
 
   return (
     <div className="App">
@@ -393,6 +636,32 @@ function App() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="faq-section">
+        <div className="container mx-auto px-6 py-20">
+          <div className="section-header">
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <p className="section-subtitle">Get answers to common questions about your ScentNGoo investment</p>
+          </div>
+          
+          <div className="faq-content">
+            {faqData.map((category, categoryIndex) => (
+              <div key={categoryIndex} className="faq-category">
+                <h3 className="faq-category-title">{category.category}</h3>
+                <div className="faq-questions">
+                  {category.questions.map((item, questionIndex) => (
+                    <div key={questionIndex} className="faq-item">
+                      <h4 className="faq-question">{item.q}</h4>
+                      <p className="faq-answer">{item.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Investment Section */}
       <section id="invest" className="invest-section">
         <div className="container mx-auto px-6 py-20">
@@ -586,7 +855,7 @@ function App() {
                 <h4>Contact Information</h4>
                 <form onSubmit={(e) => {
                   e.preventDefault();
-                  alert('Thank you for your interest! We will contact you within 24 hours to discuss your investment.');
+                  alert('Thank you for your interest! We will contact you within 24 hours to discuss your investment and arrange a consultation call.');
                   setShowCart(false);
                 }}>
                   <div className="form-group">
@@ -602,7 +871,7 @@ function App() {
                     <input type="text" placeholder="Business Name" required />
                   </div>
                   <div className="form-group">
-                    <textarea placeholder="Preferred Installation Location" rows="3"></textarea>
+                    <textarea placeholder="Preferred Installation Location & Any Questions" rows="3"></textarea>
                   </div>
                   <button type="submit" className="submit-button">
                     Secure Your Investment - £4,999
@@ -615,6 +884,19 @@ function App() {
               <p>🔒 Secure payment processing</p>
               <p>📞 Our team will contact you within 24 hours</p>
               <p>⚡ Installation typically scheduled within 2 weeks</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Legal Modal */}
+      {showLegalModal && (
+        <div className="modal-overlay" onClick={() => setShowLegalModal(null)}>
+          <div className="modal-content legal-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowLegalModal(null)}>×</button>
+            <div className="legal-content">
+              <h2>{legalContent[showLegalModal].title}</h2>
+              <div dangerouslySetInnerHTML={{ __html: legalContent[showLegalModal].content }} />
             </div>
           </div>
         </div>
@@ -638,33 +920,37 @@ function App() {
             <div className="footer-section">
               <h4>Quick Links</h4>
               <ul>
-                <li><a href="#opportunity">Business Opportunity</a></li>
-                <li><a href="#product">Product Details</a></li>
-                <li><a href="#testimonials">Success Stories</a></li>
-                <li><a href="#invest">Investment</a></li>
+                <li><a href="#opportunity" onClick={() => scrollToSection('opportunity')}>Business Opportunity</a></li>
+                <li><a href="#product" onClick={() => scrollToSection('product')}>Product Details</a></li>
+                <li><a href="#testimonials" onClick={() => scrollToSection('testimonials')}>Success Stories</a></li>
+                <li><a href="#invest" onClick={() => scrollToSection('invest')}>Investment</a></li>
               </ul>
             </div>
             
             <div className="footer-section">
               <h4>Support</h4>
               <ul>
-                <li><a href="#">Customer Service</a></li>
-                <li><a href="#">Technical Support</a></li>
-                <li><a href="#">Business Consultation</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowCart(true); }}>Customer Service</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('faq'); }}>Technical Support</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowROICalculator(true); }}>Business Consultation</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('faq'); }}>FAQ</a></li>
               </ul>
             </div>
             
             <div className="footer-section">
               <h4>Contact</h4>
               <p>📧 scentngoo@gmail.com</p>
-              <p>📞 +44 (0) 7366626260</p>
+              <p>📞 +44 (0) 20 7946 0958</p>
               <p>🌐 www.scentngoo.com</p>
             </div>
           </div>
           
           <div className="footer-bottom">
-            <p>&copy; 2025 ScentNGoo. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2025 ScentNGoo. All rights reserved. | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowLegalModal('privacy'); }}> Privacy Policy</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowLegalModal('terms'); }}> Terms of Service</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowLegalModal('refund'); }}> Refund Policy</a>
+            </p>
           </div>
         </div>
       </footer>
