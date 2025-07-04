@@ -1,4 +1,4 @@
-/* Enhanced CSS for Business Models Website */
+/* FINAL COMPLETE CSS - Enhanced Business Models with Fixed Title Positioning */
 
 * {
   margin: 0;
@@ -161,7 +161,7 @@ body {
   background-clip: text;
 }
 
-/* Enhanced Hero Section */
+/* Enhanced Hero Section - FIXED TITLE POSITIONING */
 .hero {
   min-height: 100vh;
   position: relative;
@@ -169,6 +169,7 @@ body {
   align-items: center;
   overflow: hidden;
   margin-top: 80px;
+  padding-top: 120px; /* Add extra top padding for better visibility */
 }
 
 .hero-background {
@@ -611,6 +612,23 @@ body {
 }
 
 /* Enhanced Testimonials */
+.testimonials-section {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23FFD700" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23FFA500" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+}
+
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1955,7 +1973,7 @@ body {
   color: #FFD700;
 }
 
-/* Responsive Design */
+/* Responsive Design - FIXED FOR TITLE POSITIONING */
 @media (max-width: 1024px) {
   .header-right {
     flex-direction: column;
@@ -1965,6 +1983,10 @@ body {
   
   .nav-menu {
     gap: 1.5rem;
+  }
+  
+  .hero {
+    padding-top: 100px; /* Adjust padding for tablets */
   }
   
   .business-models-grid {
@@ -2014,6 +2036,22 @@ body {
   
   .nav-link {
     font-size: 0.9rem;
+  }
+  
+  .hero {
+    padding-top: 80px; /* Reduce padding for mobile to fit content */
+    min-height: 100vh;
+    justify-content: flex-start; /* Align content to top on mobile */
+  }
+  
+  .hero-content {
+    padding-top: 2rem; /* Additional padding for mobile */
+  }
+  
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3.5rem); /* Responsive font size for mobile */
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
   }
   
   .hero-stats {
