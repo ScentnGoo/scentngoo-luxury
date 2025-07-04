@@ -1,4 +1,4 @@
-/* Enhanced CSS for 10/10 Website */
+/* Enhanced CSS for 10/10 Website with Fixed FAQ Spacing */
 
 * {
   margin: 0;
@@ -475,6 +475,89 @@ body {
   font-size: 0.95rem;
 }
 
+/* FAQ SECTION WITH PROPER SPACING */
+.faq-section {
+  background: linear-gradient(135deg, #2d1810 0%, #1a1a1a 100%);
+  position: relative;
+  padding-bottom: 6rem !important; /* Extra bottom padding for visual separation */
+  margin-bottom: 3rem; /* Add margin below FAQ section */
+}
+
+.faq-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+.faq-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-category {
+  margin-bottom: 3rem;
+}
+
+.faq-category-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #FFD700;
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.faq-category-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  border-radius: 2px;
+}
+
+.faq-questions {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+}
+
+.faq-question {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFD700;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.faq-answer {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
 /* Section Headers */
 .section-header {
   text-align: center;
@@ -867,9 +950,22 @@ body {
   box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
 }
 
-/* Investment Section */
+/* Investment Section - WITH PROPER TOP SPACING */
 .invest-section {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+  padding-top: 8rem !important; /* Extra top padding for clear separation from FAQ */
+  position: relative;
+}
+
+.invest-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
 }
 
 .invest-package {
@@ -1285,6 +1381,56 @@ body {
   font-size: 0.9rem;
 }
 
+/* Legal Modal */
+.legal-modal {
+  max-width: 800px;
+  width: 100%;
+  max-height: 80vh;
+}
+
+.legal-content {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.legal-content h2 {
+  color: #FFD700;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.legal-content h3 {
+  color: #FFD700;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+}
+
+.legal-content h4 {
+  color: #FFA500;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.legal-content ul,
+.legal-content ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.legal-content p {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 /* Footer */
 .footer {
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -1335,6 +1481,17 @@ body {
 .footer-bottom p {
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.9rem;
+}
+
+.footer-bottom a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin: 0 0.5rem;
+}
+
+.footer-bottom a:hover {
+  color: #FFD700;
 }
 
 /* Responsive Design */
@@ -1419,5 +1576,13 @@ body {
   
   .results-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .faq-section {
+    padding-bottom: 4rem !important;
+  }
+
+  .invest-section {
+    padding-top: 6rem !important;
   }
 }
