@@ -3,11 +3,13 @@ import './App.css';
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [showROICalculator, setShowROICalculator] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [showPartnershipForm, setShowPartnershipForm] = useState(false);
+  const [showLegalModal, setShowLegalModal] = useState(null);
   const [currentLanguage, setCurrentLanguage] = useState('en');
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
+  const [calculatorMode, setCalculatorMode] = useState('partnership'); // 'partnership' or 'ownership'
   const [roiInputs, setROIInputs] = useState({
     location: 'gym',
     footTraffic: 200,
@@ -31,128 +33,266 @@ function App() {
   const translations = {
     en: {
       nav: {
+        businessModels: 'Business Models',
         opportunity: 'Opportunity',
         product: 'Product',
         success: 'Success Stories',
-        invest: 'Invest Now'
+        getStarted: 'Get Started',
+        startPartnership: 'Start Partnership'
       },
       hero: {
-        title: 'Transform Your Business Into A',
-        titleHighlight: 'Luxury Fragrance Empire',
-        subtitle: 'Generate £2,000-£5,000+ monthly passive income with our premium 10-scent perfume vending machines. Perfect for pubs, clubs, gyms & indoor venues. Monitor remotely with our smart app technology.',
-        cta: 'Start Your Empire £4,999',
-        ctaSecondary: 'View ROI Calculator',
-        getStarted: 'Get Started'
+        title: 'Generate £300-£500+ Monthly',
+        titleHighlight: 'With ZERO Investment',
+        subtitle: 'We install our luxury fragrance vending machine at your location completely FREE. You earn 20% of all sales as pure passive income. No costs, no risks, just profit from day one.',
+        ctaPrimary: '🤝 START EARNING 20% - FREE INSTALLATION',
+        ctaSecondary: '💰 BUY YOUR OWN MACHINE - £4,999'
       },
       stats: {
-        sprays: 'Sprays per 100ml',
-        scents: 'Premium Scents',
-        roi: 'Month ROI'
+        investment: 'Investment Required',
+        revenue: 'Your Revenue Share',
+        monthly: 'Monthly Income'
+      },
+      businessModels: {
+        title: 'Two Ways To Profit From The Fragrance Boom',
+        subtitle: 'Choose the model that best fits your business goals and investment capacity',
+        partnership: {
+          title: 'Partnership Model',
+          investment: '£0 Investment',
+          income: 'Earn £300-500+/month',
+          recommended: '🏆 RECOMMENDED',
+          cta: 'Start Partnership - FREE',
+          example: 'Machine generates £2,000/month',
+          yourIncome: 'Your Income: £400/month (20%)'
+        },
+        ownership: {
+          title: 'Ownership Model',
+          investment: '£4,999 Investment',
+          income: 'Keep 100% of Profits',
+          badge: '💼 FULL CONTROL',
+          cta: 'Buy Machine - £4,999',
+          example: 'Machine generates £2,000/month',
+          yourProfit: 'Your Profit: £1,500/month (75%)'
+        }
       }
     },
     es: {
       nav: {
+        businessModels: 'Modelos de Negocio',
         opportunity: 'Oportunidad',
         product: 'Producto',
         success: 'Historias de Éxito',
-        invest: 'Invertir Ahora'
+        getStarted: 'Comenzar',
+        startPartnership: 'Iniciar Asociación'
       },
       hero: {
-        title: 'Transforma Tu Negocio En Un',
-        titleHighlight: 'Imperio de Fragancias de Lujo',
-        subtitle: 'Genera £2,000-£5,000+ de ingresos pasivos mensuales con nuestras máquinas expendedoras de perfumes premium de 10 fragancias. Perfecto para pubs, clubs, gimnasios y locales interiores. Monitorea remotamente con nuestra tecnología de aplicación inteligente.',
-        cta: 'Inicia Tu Imperio £4,999',
-        ctaSecondary: 'Ver Calculadora ROI',
-        getStarted: 'Comenzar'
+        title: 'Genera £300-£500+ Mensuales',
+        titleHighlight: 'Con CERO Inversión',
+        subtitle: 'Instalamos nuestra máquina expendedora de fragancias de lujo en tu ubicación completamente GRATIS. Ganas el 20% de todas las ventas como ingresos pasivos puros. Sin costos, sin riesgos, solo ganancias desde el día uno.',
+        ctaPrimary: '🤝 COMENZAR A GANAR 20% - INSTALACIÓN GRATIS',
+        ctaSecondary: '💰 COMPRA TU PROPIA MÁQUINA - £4,999'
       },
       stats: {
-        sprays: 'Pulverizaciones por 100ml',
-        scents: 'Fragancias Premium',
-        roi: 'Mes ROI'
+        investment: 'Inversión Requerida',
+        revenue: 'Tu Participación en Ingresos',
+        monthly: 'Ingresos Mensuales'
+      },
+      businessModels: {
+        title: 'Dos Formas de Beneficiarse del Boom de Fragancias',
+        subtitle: 'Elige el modelo que mejor se adapte a tus objetivos de negocio y capacidad de inversión',
+        partnership: {
+          title: 'Modelo de Asociación',
+          investment: '£0 Inversión',
+          income: 'Gana £300-500+/mes',
+          recommended: '🏆 RECOMENDADO',
+          cta: 'Iniciar Asociación - GRATIS',
+          example: 'La máquina genera £2,000/mes',
+          yourIncome: 'Tus Ingresos: £400/mes (20%)'
+        },
+        ownership: {
+          title: 'Modelo de Propiedad',
+          investment: '£4,999 Inversión',
+          income: 'Mantén 100% de las Ganancias',
+          badge: '💼 CONTROL TOTAL',
+          cta: 'Comprar Máquina - £4,999',
+          example: 'La máquina genera £2,000/mes',
+          yourProfit: 'Tu Ganancia: £1,500/mes (75%)'
+        }
       }
     },
     it: {
       nav: {
+        businessModels: 'Modelli di Business',
         opportunity: 'Opportunità',
         product: 'Prodotto',
         success: 'Storie di Successo',
-        invest: 'Investi Ora'
+        getStarted: 'Inizia',
+        startPartnership: 'Inizia Partnership'
       },
       hero: {
-        title: 'Trasforma Il Tuo Business In Un',
-        titleHighlight: 'Impero di Fragranze di Lusso',
-        subtitle: 'Genera £2,000-£5,000+ di reddito passivo mensile con le nostre macchine distributrici di profumi premium a 10 fragranze. Perfetto per pub, club, palestre e locali interni. Monitora da remoto con la nostra tecnologia app intelligente.',
-        cta: 'Inizia Il Tuo Impero £4,999',
-        ctaSecondary: 'Vedi Calcolatore ROI',
-        getStarted: 'Inizia'
+        title: 'Genera £300-£500+ Mensili',
+        titleHighlight: 'Con ZERO Investimenti',
+        subtitle: 'Installiamo la nostra macchina distributrice di profumi di lusso nella tua location completamente GRATIS. Guadagni il 20% di tutte le vendite come reddito passivo puro. Nessun costo, nessun rischio, solo profitti dal primo giorno.',
+        ctaPrimary: '🤝 INIZIA A GUADAGNARE 20% - INSTALLAZIONE GRATUITA',
+        ctaSecondary: '💰 COMPRA LA TUA MACCHINA - £4,999'
       },
       stats: {
-        sprays: 'Spruzzi per 100ml',
-        scents: 'Fragranze Premium',
-        roi: 'Mese ROI'
+        investment: 'Investimento Richiesto',
+        revenue: 'La Tua Quota di Ricavi',
+        monthly: 'Reddito Mensile'
+      },
+      businessModels: {
+        title: 'Due Modi per Trarre Profitto dal Boom delle Fragranze',
+        subtitle: 'Scegli il modello che meglio si adatta ai tuoi obiettivi di business e capacità di investimento',
+        partnership: {
+          title: 'Modello Partnership',
+          investment: '£0 Investimento',
+          income: 'Guadagna £300-500+/mese',
+          recommended: '🏆 RACCOMANDATO',
+          cta: 'Inizia Partnership - GRATIS',
+          example: 'La macchina genera £2,000/mese',
+          yourIncome: 'Il Tuo Reddito: £400/mese (20%)'
+        },
+        ownership: {
+          title: 'Modello di Proprietà',
+          investment: '£4,999 Investimento',
+          income: 'Mantieni 100% dei Profitti',
+          badge: '💼 CONTROLLO TOTALE',
+          cta: 'Compra Macchina - £4,999',
+          example: 'La macchina genera £2,000/mese',
+          yourProfit: 'Il Tuo Profitto: £1,500/mese (75%)'
+        }
       }
     },
     fr: {
       nav: {
+        businessModels: 'Modèles d\'Affaires',
         opportunity: 'Opportunité',
         product: 'Produit',
         success: 'Histoires de Succès',
-        invest: 'Investir Maintenant'
+        getStarted: 'Commencer',
+        startPartnership: 'Démarrer Partenariat'
       },
       hero: {
-        title: 'Transformez Votre Entreprise En Un',
-        titleHighlight: 'Empire de Parfums de Luxe',
-        subtitle: 'Générez £2,000-£5,000+ de revenus passifs mensuels avec nos distributeurs de parfums premium à 10 fragrances. Parfait pour les pubs, clubs, salles de sport et lieux intérieurs. Surveillez à distance avec notre technologie d\'application intelligente.',
-        cta: 'Commencez Votre Empire £4,999',
-        ctaSecondary: 'Voir Calculateur ROI',
-        getStarted: 'Commencer'
+        title: 'Générez £300-£500+ Mensuels',
+        titleHighlight: 'Avec ZÉRO Investissement',
+        subtitle: 'Nous installons notre distributeur de parfums de luxe dans votre emplacement complètement GRATUIT. Vous gagnez 20% de toutes les ventes en tant que revenu passif pur. Aucun coût, aucun risque, que du profit dès le premier jour.',
+        ctaPrimary: '🤝 COMMENCER À GAGNER 20% - INSTALLATION GRATUITE',
+        ctaSecondary: '💰 ACHETEZ VOTRE PROPRE MACHINE - £4,999'
       },
       stats: {
-        sprays: 'Pulvérisations par 100ml',
-        scents: 'Parfums Premium',
-        roi: 'Mois ROI'
+        investment: 'Investissement Requis',
+        revenue: 'Votre Part de Revenus',
+        monthly: 'Revenus Mensuels'
+      },
+      businessModels: {
+        title: 'Deux Façons de Profiter du Boom des Parfums',
+        subtitle: 'Choisissez le modèle qui correspond le mieux à vos objectifs commerciaux et à votre capacité d\'investissement',
+        partnership: {
+          title: 'Modèle de Partenariat',
+          investment: '£0 Investissement',
+          income: 'Gagnez £300-500+/mois',
+          recommended: '🏆 RECOMMANDÉ',
+          cta: 'Démarrer Partenariat - GRATUIT',
+          example: 'La machine génère £2,000/mois',
+          yourIncome: 'Vos Revenus: £400/mois (20%)'
+        },
+        ownership: {
+          title: 'Modèle de Propriété',
+          investment: '£4,999 Investissement',
+          income: 'Gardez 100% des Profits',
+          badge: '💼 CONTRÔLE TOTAL',
+          cta: 'Acheter Machine - £4,999',
+          example: 'La machine génère £2,000/mois',
+          yourProfit: 'Votre Profit: £1,500/mois (75%)'
+        }
       }
     },
     de: {
       nav: {
+        businessModels: 'Geschäftsmodelle',
         opportunity: 'Gelegenheit',
         product: 'Produkt',
         success: 'Erfolgsgeschichten',
-        invest: 'Jetzt Investieren'
+        getStarted: 'Loslegen',
+        startPartnership: 'Partnerschaft Starten'
       },
       hero: {
-        title: 'Verwandeln Sie Ihr Geschäft In Ein',
-        titleHighlight: 'Luxus-Parfüm-Imperium',
-        subtitle: 'Generieren Sie £2,000-£5,000+ monatliches passives Einkommen mit unseren Premium-Parfüm-Automaten mit 10 Düften. Perfekt für Pubs, Clubs, Fitnessstudios und Innenräume. Fernüberwachung mit unserer intelligenten App-Technologie.',
-        cta: 'Starten Sie Ihr Imperium £4,999',
-        ctaSecondary: 'ROI-Rechner Anzeigen',
-        getStarted: 'Loslegen'
+        title: 'Generieren Sie £300-£500+ Monatlich',
+        titleHighlight: 'Mit NULL Investment',
+        subtitle: 'Wir installieren unseren Luxus-Parfüm-Automaten an Ihrem Standort völlig KOSTENLOS. Sie verdienen 20% aller Verkäufe als reines passives Einkommen. Keine Kosten, keine Risiken, nur Gewinn vom ersten Tag an.',
+        ctaPrimary: '🤝 BEGINNEN SIE 20% ZU VERDIENEN - KOSTENLOSE INSTALLATION',
+        ctaSecondary: '💰 KAUFEN SIE IHRE EIGENE MASCHINE - £4,999'
       },
       stats: {
-        sprays: 'Sprühstöße pro 100ml',
-        scents: 'Premium-Düfte',
-        roi: 'Monat ROI'
+        investment: 'Erforderliche Investition',
+        revenue: 'Ihr Umsatzanteil',
+        monthly: 'Monatliches Einkommen'
+      },
+      businessModels: {
+        title: 'Zwei Wege, Vom Parfüm-Boom zu Profitieren',
+        subtitle: 'Wählen Sie das Modell, das am besten zu Ihren Geschäftszielen und Investitionskapazität passt',
+        partnership: {
+          title: 'Partnerschaftsmodell',
+          investment: '£0 Investition',
+          income: 'Verdienen Sie £300-500+/Monat',
+          recommended: '🏆 EMPFOHLEN',
+          cta: 'Partnerschaft Starten - KOSTENLOS',
+          example: 'Maschine generiert £2,000/Monat',
+          yourIncome: 'Ihr Einkommen: £400/Monat (20%)'
+        },
+        ownership: {
+          title: 'Eigentumsmodell',
+          investment: '£4,999 Investition',
+          income: 'Behalten Sie 100% der Gewinne',
+          badge: '💼 VOLLE KONTROLLE',
+          cta: 'Maschine Kaufen - £4,999',
+          example: 'Maschine generiert £2,000/Monat',
+          yourProfit: 'Ihr Gewinn: £1,500/Monat (75%)'
+        }
       }
     },
     ro: {
       nav: {
+        businessModels: 'Modele de Afaceri',
         opportunity: 'Oportunitate',
         product: 'Produs',
         success: 'Povești de Succes',
-        invest: 'Investește Acum'
+        getStarted: 'Începe',
+        startPartnership: 'Începe Parteneriatul'
       },
       hero: {
-        title: 'Transformă-ți Afacerea Într-Un',
-        titleHighlight: 'Imperiu de Parfumuri de Lux',
-        subtitle: 'Generează £2,000-£5,000+ venit pasiv lunar cu mașinile noastre automate de parfumuri premium cu 10 parfumuri. Perfect pentru pub-uri, cluburi, săli de fitness și locuri interioare. Monitorizează de la distanță cu tehnologia noastră de aplicație inteligentă.',
-        cta: 'Începe-ți Imperiul £4,999',
-        ctaSecondary: 'Vezi Calculatorul ROI',
-        getStarted: 'Începe'
+        title: 'Generează £300-£500+ Lunar',
+        titleHighlight: 'Cu ZERO Investiție',
+        subtitle: 'Instalăm automat parfumurilor de lux la locația ta complet GRATUIT. Câștigi 20% din toate vânzările ca venit pasiv pur. Fără costuri, fără riscuri, doar profit din prima zi.',
+        ctaPrimary: '🤝 ÎNCEPE SĂ CÂȘTIGI 20% - INSTALARE GRATUITĂ',
+        ctaSecondary: '💰 CUMPĂRĂ-ȚI PROPRIA MAȘINĂ - £4,999'
       },
       stats: {
-        sprays: 'Pulverizări pe 100ml',
-        scents: 'Parfumuri Premium',
-        roi: 'Lună ROI'
+        investment: 'Investiție Necesară',
+        revenue: 'Cota Ta de Venituri',
+        monthly: 'Venit Lunar'
+      },
+      businessModels: {
+        title: 'Două Moduri de a Profita de Boom-ul Parfumurilor',
+        subtitle: 'Alege modelul care se potrivește cel mai bine obiectivelor tale de afaceri și capacității de investiție',
+        partnership: {
+          title: 'Model de Parteneriat',
+          investment: '£0 Investiție',
+          income: 'Câștigă £300-500+/lună',
+          recommended: '🏆 RECOMANDAT',
+          cta: 'Începe Parteneriatul - GRATUIT',
+          example: 'Mașina generează £2,000/lună',
+          yourIncome: 'Venitul Tău: £400/lună (20%)'
+        },
+        ownership: {
+          title: 'Model de Proprietate',
+          investment: '£4,999 Investiție',
+          income: 'Păstrează 100% din Profituri',
+          badge: '💼 CONTROL TOTAL',
+          cta: 'Cumpără Mașina - £4,999',
+          example: 'Mașina generează £2,000/lună',
+          yourProfit: 'Profitul Tău: £1,500/lună (75%)'
+        }
       }
     }
   };
@@ -187,25 +327,36 @@ function App() {
 
   const testimonials = [
     {
+      name: "James Wright",
+      business: "Premium Gym Owner", 
+      rating: 5,
+      text: "We earn £420/month from our ScentNGoo partnership with zero effort. They handle everything - installation, maintenance, restocking. We just collect the cheques! No investment, pure passive income.",
+      revenue: "£420/month",
+      type: "partnership"
+    },
+    {
       name: "Marcus Johnson",
       business: "Elite Fitness Club Owner",
       rating: 5,
-      text: "Best investment I've made! My ScentNGoo machine in my gym generates £2,800+ monthly with zero effort. The app monitoring is brilliant - I know exactly when to refill without even visiting. Outstanding ROI and incredible support team!",
-      revenue: "£2,800/month"
+      text: "Best investment I've made! My ScentNGoo machine generates £2,800+ monthly and I own it outright. The app monitoring is brilliant - I know exactly when to refill without even visiting. Outstanding ROI!",
+      revenue: "£2,800/month",
+      type: "ownership"
     },
     {
       name: "Sarah Mitchell",
       business: "Upscale Pub Chain",
       rating: 5,
-      text: "We installed 3 machines across our venues. The 10-scent variety keeps customers coming back daily! Revenue exceeded expectations by 180%. ScentNGoo's service is phenomenal - they handle everything professionally.",
-      revenue: "£8,400/month (3 units)"
+      text: "We partnered with ScentNGoo across 3 venues earning £1,200+ monthly combined with zero investment from us. They handle everything professionally while we focus on our core business.",
+      revenue: "£1,200/month (3 locations)",
+      type: "partnership"
     },
     {
-      name: "David Rodriguez",
+      name: "David Rodriguez", 
       business: "Premium Nightclub",
       rating: 5,
-      text: "Incredible passive income stream! The machine pays for itself in 3 months. Customers love having 10 premium fragrances to choose from. The 625 sprays per bottle means amazing margins. Couldn't ask for better support!",
-      revenue: "£3,200/month"
+      text: "Incredible passive income stream! Our partnership with ScentNGoo generates £640/month with absolutely no work from us. Customers love having 10 premium fragrances to choose from.",
+      revenue: "£640/month",
+      type: "partnership"
     }
   ];
 
@@ -219,33 +370,41 @@ function App() {
 
   const calculateROI = () => {
     const location = locationMultipliers[roiInputs.location];
-    const dailyUsers = Math.floor(roiInputs.footTraffic * 0.15); // 15% conversion rate
+    const dailyUsers = Math.floor(roiInputs.footTraffic * 0.15);
     const dailyUses = dailyUsers * location.avgUses;
     const dailyRevenue = dailyUses * roiInputs.pricePerSpray * location.multiplier;
     const monthlyRevenue = dailyRevenue * roiInputs.operatingDays;
-    const monthlyProfit = monthlyRevenue * 0.75; // 75% profit margin
-    const yearlyProfit = monthlyProfit * 12;
-    const breakEvenMonths = 4999 / monthlyProfit;
-    const roi = ((yearlyProfit - 4999) / 4999) * 100;
-
-    return {
-      dailyUsers,
-      dailyUses,
-      dailyRevenue: Math.round(dailyRevenue),
-      monthlyRevenue: Math.round(monthlyRevenue),
-      monthlyProfit: Math.round(monthlyProfit),
-      yearlyProfit: Math.round(yearlyProfit),
-      breakEvenMonths: Math.round(breakEvenMonths * 10) / 10,
-      roi: Math.round(roi)
-    };
-  };
-
-  const nextTestimonial = () => {
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    
+    if (calculatorMode === 'partnership') {
+      const partnershipIncome = monthlyRevenue * 0.2; // 20% share
+      const yearlyIncome = partnershipIncome * 12;
+      return {
+        dailyUsers,
+        dailyUses,
+        dailyRevenue: Math.round(dailyRevenue),
+        monthlyRevenue: Math.round(monthlyRevenue),
+        partnershipIncome: Math.round(partnershipIncome),
+        yearlyIncome: Math.round(yearlyIncome),
+        investment: 0,
+        roi: 'Infinite (£0 investment)'
+      };
+    } else {
+      const monthlyProfit = monthlyRevenue * 0.75;
+      const yearlyProfit = monthlyProfit * 12;
+      const breakEvenMonths = 4999 / monthlyProfit;
+      const roi = ((yearlyProfit - 4999) / 4999) * 100;
+      return {
+        dailyUsers,
+        dailyUses,
+        dailyRevenue: Math.round(dailyRevenue),
+        monthlyRevenue: Math.round(monthlyRevenue),
+        monthlyProfit: Math.round(monthlyProfit),
+        yearlyProfit: Math.round(yearlyProfit),
+        breakEvenMonths: Math.round(breakEvenMonths * 10) / 10,
+        roi: Math.round(roi),
+        investment: 4999
+      };
+    }
   };
 
   const handleROIInputChange = (field, value) => {
@@ -255,7 +414,298 @@ function App() {
     }));
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const roiResults = calculateROI();
+
+  const legalContent = {
+    terms: {
+      title: "Terms of Service",
+      content: `
+        <h3>TERMS OF SERVICE - ScentNGoo Ltd</h3>
+        
+        <h4>1. COMPANY INFORMATION</h4>
+        <p>ScentNGoo Ltd, UK Registered Company<br/>
+        Email: scentngoo@gmail.com<br/>
+        Phone: +44 (0) 20 7946 0958</p>
+
+        <h4>2. CONSUMER RIGHTS (UK)</h4>
+        <p>Under the Consumer Rights Act 2015, you have the right to:</p>
+        <ul>
+          <li>Receive goods that match their description</li>
+          <li>14-day cooling-off period for distance sales</li>
+          <li>Repair, replacement, or refund for faulty goods</li>
+          <li>Protection against unfair terms</li>
+        </ul>
+
+        <h4>3. BUSINESS MODELS</h4>
+        <h5>Partnership Model:</h5>
+        <ul>
+          <li>£0 investment required from venue owner</li>
+          <li>ScentNGoo retains ownership of equipment</li>
+          <li>Venue receives 20% of gross sales revenue</li>
+          <li>Monthly payments processed automatically</li>
+          <li>Either party may terminate with 30 days notice</li>
+        </ul>
+        
+        <h5>Ownership Model:</h5>
+        <ul>
+          <li>£4,999 investment includes machine, installation, and training</li>
+          <li>Customer owns equipment outright</li>
+          <li>1-year manufacturer warranty on hardware</li>
+          <li>30-day money-back guarantee</li>
+          <li>ROI projections are estimates based on average performance</li>
+        </ul>
+
+        <h4>4. INSTALLATION & LOCATION</h4>
+        <ul>
+          <li>Professional installation within 2-4 weeks of agreement</li>
+          <li>Customer must secure venue permissions</li>
+          <li>Installation location must meet technical requirements</li>
+          <li>Additional charges may apply for remote locations</li>
+        </ul>
+
+        <h4>5. LIABILITY</h4>
+        <p>Our liability is limited in accordance with UK Consumer Rights Act 2015. We provide comprehensive business insurance guidance and require customers to maintain appropriate commercial insurance.</p>
+
+        <h4>6. GOVERNING LAW</h4>
+        <p>These terms are governed by English law and subject to the exclusive jurisdiction of English courts.</p>
+      `
+    },
+    privacy: {
+      title: "Privacy Policy",
+      content: `
+        <h3>PRIVACY POLICY - ScentNGoo Ltd</h3>
+        
+        <h4>1. DATA CONTROLLER</h4>
+        <p>ScentNGoo Ltd processes your personal data in accordance with UK GDPR and the Data Protection Act 2018.</p>
+
+        <h4>2. DATA WE COLLECT</h4>
+        <ul>
+          <li>Contact information (name, email, phone number)</li>
+          <li>Business details for partnership or investment processing</li>
+          <li>Location preferences and requirements</li>
+          <li>Website analytics data (anonymized)</li>
+          <li>Communication records for support purposes</li>
+          <li>Sales and revenue data for partnership payments</li>
+        </ul>
+
+        <h4>3. LEGAL BASIS FOR PROCESSING</h4>
+        <ul>
+          <li><strong>Contract performance:</strong> Processing partnerships and service delivery</li>
+          <li><strong>Legitimate interests:</strong> Customer support, business development</li>
+          <li><strong>Consent:</strong> Marketing communications and newsletters</li>
+          <li><strong>Legal obligation:</strong> Tax records and compliance</li>
+        </ul>
+
+        <h4>4. YOUR RIGHTS UNDER UK GDPR</h4>
+        <ul>
+          <li>Right to access your personal data</li>
+          <li>Right to rectification of incorrect data</li>
+          <li>Right to erasure ('right to be forgotten')</li>
+          <li>Right to data portability</li>
+          <li>Right to object to processing</li>
+          <li>Right to withdraw consent</li>
+        </ul>
+
+        <h4>5. DATA RETENTION</h4>
+        <ul>
+          <li>Customer and transaction data: 7 years (HMRC requirements)</li>
+          <li>Partnership agreements and payment records: 7 years</li>
+          <li>Marketing data: Until consent is withdrawn</li>
+          <li>Support records: 3 years after case closure</li>
+        </ul>
+
+        <h4>6. COOKIES AND TRACKING</h4>
+        <ul>
+          <li>Essential cookies for website functionality</li>
+          <li>Analytics cookies for website improvement (Google Analytics)</li>
+          <li>Marketing cookies with explicit consent</li>
+        </ul>
+
+        <h4>7. CONTACT FOR DATA MATTERS</h4>
+        <p>For any data protection queries, contact: scentngoo@gmail.com</p>
+      `
+    },
+    refund: {
+      title: "Refund Policy",
+      content: `
+        <h3>REFUND POLICY - ScentNGoo Ltd</h3>
+        
+        <h4>1. PARTNERSHIP MODEL</h4>
+        <ul>
+          <li>No refunds applicable (no customer investment)</li>
+          <li>Either party may terminate partnership with 30 days notice</li>
+          <li>Equipment removal within 14 days of termination</li>
+          <li>Final payment settlement within 30 days</li>
+        </ul>
+
+        <h4>2. OWNERSHIP MODEL - 30-DAY MONEY-BACK GUARANTEE</h4>
+        <ul>
+          <li>Full refund available within 30 days of delivery</li>
+          <li>Machine must be returned in original condition</li>
+          <li>Customer responsible for return shipping costs</li>
+          <li>Refund processed within 14 days of return receipt</li>
+        </ul>
+
+        <h4>3. CONSUMER RIGHTS ACT 2015</h4>
+        <ul>
+          <li>14-day cooling-off period for distance sales</li>
+          <li>Right to cancel without giving any reason</li>
+          <li>Full refund including original delivery costs</li>
+          <li>Cancellation must be in writing</li>
+        </ul>
+
+        <h4>4. WARRANTY CLAIMS</h4>
+        <ul>
+          <li>1-year comprehensive hardware warranty</li>
+          <li>Free repair or replacement for manufacturing defects</li>
+          <li>On-site technical support included</li>
+          <li>Excludes damage from misuse or negligence</li>
+        </ul>
+
+        <h4>5. REFUND PROCESS</h4>
+        <ol>
+          <li>Contact scentngoo@gmail.com with your order details</li>
+          <li>Receive return authorization and instructions</li>
+          <li>Package machine securely for return shipment</li>
+          <li>Refund processed upon inspection</li>
+        </ol>
+
+        <h4>6. EXCLUSIONS</h4>
+        <ul>
+          <li>Installation costs (if service completed)</li>
+          <li>Consumable items (fragrances, supplies)</li>
+          <li>Revenue losses or business interruption</li>
+          <li>Damage from normal wear and tear</li>
+        </ul>
+
+        <h4>7. DISPUTE RESOLUTION</h4>
+        <p>Any disputes will be handled through UK consumer protection services and Alternative Dispute Resolution (ADR) schemes where applicable.</p>
+      `
+    }
+  };
+
+  const faqData = [
+    {
+      category: "Partnership Model",
+      questions: [
+        {
+          q: "How much do we earn with the partnership model?",
+          a: "You receive 20% of all sales revenue. Most locations earn £300-500+ monthly, with high-traffic venues earning £600-800+. Your income grows with machine usage - no caps or limits."
+        },
+        {
+          q: "What are our responsibilities as a partner?",
+          a: "Simply provide the space (approximately 2m x 1m) and a standard electrical outlet. We handle everything else: installation, maintenance, restocking, customer service, and payment processing."
+        },
+        {
+          q: "What's the difference between partnership and buying outright?",
+          a: "Partnership: £0 investment, earn 20% of sales, we own/maintain equipment. Ownership: £4,999 investment, keep 100% of profits, you own/maintain equipment. Both models are profitable."
+        },
+        {
+          q: "Can we switch from partnership to ownership later?",
+          a: "Absolutely! We offer flexible upgrade options. You can purchase your machine at any time with credit for revenue already generated. Many partners choose to buy after seeing the income potential."
+        },
+        {
+          q: "How often do we receive payments?",
+          a: "Partnership payments are processed monthly via bank transfer. You'll receive detailed sales reports and can monitor real-time performance through our partner dashboard."
+        },
+        {
+          q: "What if the machine doesn't generate expected income?",
+          a: "We're so confident in our product that we guarantee minimum performance standards. If your location doesn't meet expectations within 90 days, we'll relocate the machine at no cost to you."
+        }
+      ]
+    },
+    {
+      category: "Investment & Returns",
+      questions: [
+        {
+          q: "Is buying the machine outright guaranteed to make money?",
+          a: "ROI projections are estimates based on average performance across similar locations. Actual results vary depending on location foot traffic, pricing strategy, and management. We provide comprehensive training and support to maximize your success."
+        },
+        {
+          q: "What exactly is included in the £4,999 investment?",
+          a: "Your investment includes: Premium 10-scent vending machine, professional installation, comprehensive training program, starter fragrance pack, mobile app setup, 1-year warranty, ongoing technical support, and marketing materials."
+        },
+        {
+          q: "How quickly can I expect to see returns on ownership?",
+          a: "Most customers break even within 3-6 months. High-traffic locations often see positive returns within 6-8 weeks. We provide detailed location analysis to optimize your ROI potential."
+        },
+        {
+          q: "Can I purchase multiple machines?",
+          a: "Absolutely! We offer volume discounts for multiple machine purchases. Many successful partners start with partnerships, then purchase additional machines for expansion."
+        }
+      ]
+    },
+    {
+      category: "Installation & Operation",
+      questions: [
+        {
+          q: "How long does installation take?",
+          a: "Professional installation typically takes 2-4 hours. Our certified technicians handle all setup, calibration, and testing. Partners receive a brief orientation, while owners get comprehensive hands-on training."
+        },
+        {
+          q: "Do I need planning permission or special licenses?",
+          a: "Generally, no planning permission is required for indoor vending machines. However, you should check with your local council and ensure you have venue owner permission. We provide guidance on all regulatory requirements."
+        },
+        {
+          q: "What are the power and space requirements?",
+          a: "The machine requires: Standard UK 3-pin electrical outlet (13A), minimum 2m x 1m floor space, and reasonable ambient temperature (10-30°C). Full technical specifications provided upon agreement."
+        },
+        {
+          q: "How do you restock the fragrances?",
+          a: "For partnerships, we handle all restocking automatically. Our smart app alerts us when levels are low, and we schedule refills proactively. For owners, fragrances are delivered directly to your location with easy 10-minute refill process."
+        }
+      ]
+    },
+    {
+      category: "Technical Support",
+      questions: [
+        {
+          q: "What if the machine breaks down?",
+          a: "All machines include comprehensive warranty coverage. We offer 24/7 phone support and can arrange on-site visits within 48 hours for major issues. Most problems can be resolved remotely via our smart diagnostic system."
+        },
+        {
+          q: "How do I monitor sales and performance?",
+          a: "Our proprietary mobile app provides real-time data including: daily sales figures, inventory levels, popular fragrances, customer usage patterns, and maintenance alerts. Partners get access to their revenue dashboard."
+        },
+        {
+          q: "What ongoing maintenance is required?",
+          a: "Minimal maintenance required! The machine features self-cleaning nozzles and automated diagnostics. For partnerships, we handle everything. For owners: monthly exterior cleaning and supply level monitoring."
+        },
+        {
+          q: "Is training provided?",
+          a: "Yes! Partners receive orientation on machine features and revenue tracking. Owners receive comprehensive training: on-site installation tutorial, mobile app guidance, maintenance procedures, and business optimization tips."
+        }
+      ]
+    },
+    {
+      category: "Business Questions",
+      questions: [
+        {
+          q: "What are the ongoing operational costs?",
+          a: "For partnerships: £0 ongoing costs - we handle everything. For ownership: Primary costs are fragrance refills (£50-80/month depending on usage) and minimal electricity (£5-10/month)."
+        },
+        {
+          q: "How do I choose the best location?",
+          a: "We provide location analysis consulting! Ideal locations include: fitness centers, upscale pubs, nightclubs, hotels, and premium restaurants. We help evaluate foot traffic, demographics, and revenue potential for both models."
+        },
+        {
+          q: "What payment methods does the machine accept?",
+          a: "The machine accepts: contactless cards, chip & PIN, mobile payments (Apple Pay, Google Pay), and can be configured for cash payments. All transactions are processed securely with full compliance."
+        },
+        {
+          q: "Can I customize the fragrance selection?",
+          a: "Yes! While we provide a premium starter selection, fragrances can be customized based on location preferences. We offer over 50 premium fragrances and provide sales data to optimize selection."
+        }
+      ]
+    }
+  ];
 
   return (
     <div className="App">
@@ -271,46 +721,49 @@ function App() {
               <span className="logo-text">ScentNGoo</span>
             </div>
           </div>
-          <nav className="hidden md:flex space-x-8">
-            <a href="#opportunity" className="nav-link">{t.nav.opportunity}</a>
-            <a href="#product" className="nav-link">{t.nav.product}</a>
-            <a href="#testimonials" className="nav-link">{t.nav.success}</a>
-            <a href="#invest" className="nav-link">{t.nav.invest}</a>
-          </nav>
-          <div className="header-actions">
-            <div className="language-selector">
-              <button 
-                className="language-btn"
-                onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
-              >
-                <span className="flag">{languages[currentLanguage].flag}</span>
-                <span className="lang-code">{languages[currentLanguage].code}</span>
-                <span className="dropdown-arrow">▼</span>
-              </button>
-              {showLanguageDropdown && (
-                <div className="language-dropdown">
-                  {Object.entries(languages).map(([code, lang]) => (
-                    <button
-                      key={code}
-                      className={`language-option ${code === currentLanguage ? 'active' : ''}`}
-                      onClick={() => handleLanguageChange(code)}
-                    >
-                      <span className="flag">{lang.flag}</span>
-                      <span className="lang-name">{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+          <div className="header-right">
+            <nav className="nav-menu">
+              <a href="#business-models" className="nav-link">{t.nav.businessModels}</a>
+              <a href="#opportunity" className="nav-link">{t.nav.opportunity}</a>
+              <a href="#product" className="nav-link">{t.nav.product}</a>
+              <a href="#testimonials" className="nav-link">{t.nav.success}</a>
+              <a href="#invest" className="nav-link">{t.nav.getStarted}</a>
+            </nav>
+            <div className="header-actions">
+              <div className="language-selector">
+                <button 
+                  className="language-btn"
+                  onClick={() => setShowLanguageDropdown(!showLanguageDropdown)}
+                >
+                  <span className="flag">{languages[currentLanguage].flag}</span>
+                  <span className="lang-code">{languages[currentLanguage].code}</span>
+                  <span className="dropdown-arrow">▼</span>
+                </button>
+                {showLanguageDropdown && (
+                  <div className="language-dropdown">
+                    {Object.entries(languages).map(([code, lang]) => (
+                      <button
+                        key={code}
+                        className={`language-option ${code === currentLanguage ? 'active' : ''}`}
+                        onClick={() => handleLanguageChange(code)}
+                      >
+                        <span className="flag">{lang.flag}</span>
+                        <span className="lang-name">{lang.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button className="cta-button-header" onClick={() => setShowPartnershipForm(true)}>{t.nav.startPartnership}</button>
             </div>
-            <button className="cta-button-header" onClick={() => setShowCart(true)}>{t.hero.getStarted}</button>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <section className="hero">
         <div className="hero-background">
-          <img src="https://images.unsplash.com/photo-1575884344532-3a93810a682d" alt="Luxury Hotel London" className="hero-bg-image" />
+          <img src="https://images.unsplash.com/photo-1661422586023-681ea60507e2" alt="Luxury Hotel" className="hero-bg-image" />
           <div className="hero-overlay"></div>
         </div>
         <div className="container mx-auto px-6 hero-content">
@@ -319,31 +772,150 @@ function App() {
               {t.hero.title}
               <span className="gradient-text"> {t.hero.titleHighlight}</span>
             </h1>
+            <div style={{textAlign: 'center', margin: '30px 0'}}>
+              <img 
+                src="https://i.imgur.com/TpNRLbp.jpg" 
+                alt="ScentNGoo Vending Machine" 
+                style={{
+                  maxWidth: '400px', 
+                  width: '100%', 
+                  height: 'auto', 
+                  borderRadius: '15px', 
+                  border: '3px solid gold',
+                  boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)'
+                }} 
+              />
+            </div>
             <p className="hero-subtitle">
               {t.hero.subtitle}
             </p>
             <div className="hero-stats">
               <div className="stat">
-                <span className="stat-number">625</span>
-                <span className="stat-label">{t.stats.sprays}</span>
+                <span className="stat-number">£0</span>
+                <span className="stat-label">{t.stats.investment}</span>
               </div>
               <div className="stat">
-                <span className="stat-number">10</span>
-                <span className="stat-label">{t.stats.scents}</span>
+                <span className="stat-number">20%</span>
+                <span className="stat-label">{t.stats.revenue}</span>
               </div>
               <div className="stat">
-                <span className="stat-number">3-6</span>
-                <span className="stat-label">{t.stats.roi}</span>
+                <span className="stat-number">£300-500+</span>
+                <span className="stat-label">{t.stats.monthly}</span>
               </div>
             </div>
             <div className="hero-buttons">
-              <button className="cta-button-primary" onClick={() => setShowCart(true)}>{t.hero.cta}</button>
-              <button className="cta-button-secondary" onClick={() => setShowROICalculator(true)}>{t.hero.ctaSecondary}</button>
+              <button className="cta-button-primary" onClick={() => setShowPartnershipForm(true)}>
+                {t.hero.ctaPrimary}
+              </button>
+              <button className="cta-button-secondary" onClick={() => setShowCart(true)}>
+                {t.hero.ctaSecondary}
+              </button>
             </div>
           </div>
         </div>
       </section>
 
+      {/* New Business Models Section */}
+      <section id="business-models" className="business-models-section">
+        <div className="container mx-auto px-6 py-20">
+          <div className="section-header">
+            <h2 className="section-title">{t.businessModels.title}</h2>
+            <p className="section-subtitle">{t.businessModels.subtitle}</p>
+          </div>
+          
+          <div className="business-models-grid">
+            <div className="business-model-card partnership-card">
+              <div className="model-badge recommended">{t.businessModels.partnership.recommended}</div>
+              <div className="model-icon">🤝</div>
+              <h3>{t.businessModels.partnership.title}</h3>
+              <div className="model-price">{t.businessModels.partnership.investment}</div>
+              <div className="model-income">{t.businessModels.partnership.income}</div>
+              
+              <div className="model-features">
+                <div className="feature">✅ Zero Investment Required</div>
+                <div className="feature">✅ We Install & Maintain Everything</div>
+                <div className="feature">✅ You Keep 20% of All Sales</div>
+                <div className="feature">✅ Average £300-500+/month Income</div>
+                <div className="feature">✅ Zero Risk, Pure Passive Profit</div>
+                <div className="feature">✅ No Equipment Responsibility</div>
+                <div className="feature">✅ Monthly Automatic Payments</div>
+                <div className="feature">✅ Upgrade to Ownership Anytime</div>
+              </div>
+              
+              <button className="model-cta-button" onClick={() => setShowPartnershipForm(true)}>
+                {t.businessModels.partnership.cta}
+              </button>
+              
+              <div className="model-example">
+                <strong>Example:</strong> {t.businessModels.partnership.example}<br/>
+                <span className="highlight">{t.businessModels.partnership.yourIncome}</span>
+              </div>
+            </div>
+
+            <div className="business-model-card ownership-card">
+              <div className="model-badge">{t.businessModels.ownership.badge}</div>
+              <div className="model-icon">💰</div>
+              <h3>{t.businessModels.ownership.title}</h3>
+              <div className="model-price">{t.businessModels.ownership.investment}</div>
+              <div className="model-income">{t.businessModels.ownership.income}</div>
+              
+              <div className="model-features">
+                <div className="feature">✅ Own Your Machine Outright</div>
+                <div className="feature">✅ Keep 100% of All Profits</div>
+                <div className="feature">✅ Full Control & Flexibility</div>
+                <div className="feature">✅ Professional Installation Included</div>
+                <div className="feature">✅ 1-Year Warranty & Support</div>
+                <div className="feature">✅ 30-Day Money Back Guarantee</div>
+                <div className="feature">✅ Comprehensive Training Program</div>
+                <div className="feature">✅ Average ROI: 3-6 Months</div>
+              </div>
+              
+              <button className="model-cta-button" onClick={() => setShowCart(true)}>
+                {t.businessModels.ownership.cta}
+              </button>
+              
+              <div className="model-example">
+                <strong>Example:</strong> {t.businessModels.ownership.example}<br/>
+                <span className="highlight">{t.businessModels.ownership.yourProfit}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="models-comparison">
+            <h3>Quick Comparison</h3>
+            <div className="comparison-table">
+              <div className="comparison-row header">
+                <div className="comparison-cell"></div>
+                <div className="comparison-cell">Partnership</div>
+                <div className="comparison-cell">Ownership</div>
+              </div>
+              <div className="comparison-row">
+                <div className="comparison-cell">Initial Investment</div>
+                <div className="comparison-cell highlight">£0</div>
+                <div className="comparison-cell">£4,999</div>
+              </div>
+              <div className="comparison-row">
+                <div className="comparison-cell">Revenue Share</div>
+                <div className="comparison-cell">20%</div>
+                <div className="comparison-cell highlight">100%</div>
+              </div>
+              <div className="comparison-row">
+                <div className="comparison-cell">Maintenance</div>
+                <div className="comparison-cell highlight">We Handle</div>
+                <div className="comparison-cell">You Handle</div>
+              </div>
+              <div className="comparison-row">
+                <div className="comparison-cell">Risk Level</div>
+                <div className="comparison-cell highlight">Zero Risk</div>
+                <div className="comparison-cell">Low Risk</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Rest of the sections remain the same but I'll continue with the key ones that need translation */}
+      
       {/* Opportunity Section */}
       <section id="opportunity" className="opportunity-section">
         <div className="container mx-auto px-6 py-20">
@@ -360,7 +932,7 @@ function App() {
               </div>
               <div className="card-content">
                 <h3>Premium Restaurants & Pubs</h3>
-                <p>Perfect for upscale venues where customers want to smell great before socializing. Average revenue: £2,200-£3,800/month</p>
+                <p>Perfect for upscale venues where customers want to smell great before socializing. Partnership income: £300-500/month | Ownership profit: £1,500-2,800/month</p>
                 <div className="revenue-badge">High Traffic = High Returns</div>
               </div>
             </div>
@@ -372,7 +944,7 @@ function App() {
               </div>
               <div className="card-content">
                 <h3>Elite Fitness Centers</h3>
-                <p>Gym-goers love fresh scents post-workout. Recurring customers guarantee steady income. Average revenue: £1,800-£3,200/month</p>
+                <p>Gym-goers love fresh scents post-workout. Recurring customers guarantee steady income. Partnership income: £250-420/month | Ownership profit: £1,200-2,100/month</p>
                 <div className="revenue-badge">Daily Recurring Users</div>
               </div>
             </div>
@@ -384,13 +956,12 @@ function App() {
               </div>
               <div className="card-content">
                 <h3>Upscale Nightclubs</h3>
-                <p>Premium venues, premium prices. Party-goers pay top dollar for luxury fragrances. Average revenue: £3,500-£5,200/month</p>
+                <p>Premium venues, premium prices. Party-goers pay top dollar for luxury fragrances. Partnership income: £500-800+/month | Ownership profit: £2,500-4,000+/month</p>
                 <div className="revenue-badge">Maximum Revenue Potential</div>
               </div>
             </div>
           </div>
 
-          {/* Example Placements */}
           <div className="placement-examples">
             <h3>Perfect Placement Examples</h3>
             <div className="examples-grid">
@@ -441,431 +1012,535 @@ function App() {
         </div>
       </section>
 
+      {/* Continue with other sections... The rest remains the same structure but with translated content where needed */}
+      
       {/* Product Showcase */}
       <section id="product" className="product-section">
         <div className="container mx-auto px-6 py-20">
           <div className="product-showcase">
             <div className="product-hero">
               <div className="product-image-container">
-                <div className="vending-machine-display">
-                  <div className="machine-frame">
-                    <div className="machine-screen">
-                      <div className="perfume-bottles">
-                        <div className="bottle-row">
-                          <div className="bottle gold"></div>
-                          <div className="bottle pink"></div>
-                          <div className="bottle triangle"></div>
-                          <div className="bottle black"></div>
-                          <div className="bottle blue"></div>
-                        </div>
-                        <div className="bottle-row">
-                          <div className="bottle gold"></div>
-                          <div className="bottle pink"></div>
-                          <div className="bottle triangle"></div>
-                          <div className="bottle black"></div>
-                          <div className="bottle blue"></div>
-                        </div>
-                      </div>
-                      <div className="selection-panel">
-                        <div className="selector-row">
-                          <div className="selector">1</div>
-                          <div className="selector">2</div>
-                          <div className="selector">3</div>
-                          <div className="selector">4</div>
-                          <div className="selector">5</div>
-                        </div>
-                        <div className="selector-row">
-                          <div className="selector">6</div>
-                          <div className="selector">7</div>
-                          <div className="selector">8</div>
-                          <div className="selector">9</div>
-                          <div className="selector">10</div>
-                        </div>
-                      </div>
-                      <div className="payment-area">
-                        <div className="payment-device"></div>
-                        <div className="instruction-text">Make the payment</div>
-                      </div>
-                    </div>
+                <img 
+                  src="https://i.imgur.com/TpNRLbp.jpg" 
+                  alt="ScentNGoo Vending Machine" 
+                  style={{
+                    width: '100%',
+                    maxWidth: '400px',
+                    height: 'auto',
+                    borderRadius: '20px',
+                    boxShadow: '0 20px 60px rgba(255, 215, 0, 0.3)',
+                    border: '3px solid rgba(255, 215, 0, 0.4)',
+                    display: 'block',
+                    margin: '0 auto'
+                  }}
+                />
+              </div>
+              <div className="product-image-overlay">
+                <div className="feature-callout">
+                  <span className="callout-number">10</span>
+                  <span className="callout-text">Premium Scents</span>
+                </div>
+                <div className="feature-callout">
+                  <span className="callout-icon">📱</span>
+                  <span className="callout-text">App Monitoring</span>
+                </div>
+              </div>
+            </div>
+            <div className="product-content">
+              <h2 className="product-title">The ScentNGoo Luxury Vending System</h2>
+              <p className="product-description">
+                State-of-the-art technology meets premium design. Our machines don't just dispense fragrance - 
+                they create an experience that customers crave and pay premium prices for.
+              </p>
+              
+              <div className="product-features">
+                <div className="feature">
+                  <div className="feature-icon">✨</div>
+                  <div>
+                    <h4>Premium LED Display</h4>
+                    <p>Stunning visual interface that attracts customers and showcases all 10 fragrances</p>
                   </div>
                 </div>
-                <div className="product-image-overlay">
-                  <div className="feature-callout">
-                    <span className="callout-number">10</span>
-                    <span className="callout-text">Premium Scents</span>
+                <div className="feature">
+                  <div className="feature-icon">🔒</div>
+                  <div>
+                    <h4>Secure Payment System</h4>
+                    <p>Accepts cards, contactless, and mobile payments for maximum conversion</p>
                   </div>
-                  <div className="feature-callout">
-                    <span className="callout-icon">📱</span>
-                    <span className="callout-text">App Monitoring</span>
+                </div>
+                <div className="feature">
+                  <div className="feature-icon">📊</div>
+                  <div>
+                    <h4>Real-Time Analytics</h4>
+                    <p>Monitor sales, inventory, and performance from anywhere with our mobile app</p>
+                  </div>
+                </div>
+                <div className="feature">
+                  <div className="feature-icon">🛠️</div>
+                  <div>
+                    <h4>Minimal Maintenance</h4>
+                    <p>Self-cleaning nozzles and automated diagnostics ensure 99.9% uptime</p>
                   </div>
                 </div>
               </div>
-              <div className="product-content">
-                <h2 className="product-title">The ScentNGoo Luxury Vending System</h2>
-                <p className="product-description">
-                  State-of-the-art technology meets premium design. Our machines don't just dispense fragrance - 
-                  they create an experience that customers crave and pay premium prices for.
-                </p>
-                
-                <div className="product-features">
-                  <div className="feature">
-                    <div className="feature-icon">✨</div>
-                    <div>
-                      <h4>Premium LED Display</h4>
-                      <p>Stunning visual interface that attracts customers and showcases all 10 fragrances</p>
-                    </div>
-                  </div>
-                  <div className="feature">
-                    <div className="feature-icon">🔒</div>
-                    <div>
-                      <h4>Secure Payment System</h4>
-                      <p>Accepts cards, contactless, and mobile payments for maximum conversion</p>
-                    </div>
-                  </div>
-                  <div className="feature">
-                    <div className="feature-icon">📊</div>
-                    <div>
-                      <h4>Real-Time Analytics</h4>
-                      <p>Monitor sales, inventory, and performance from anywhere with our mobile app</p>
-                    </div>
-                  </div>
-                  <div className="feature">
-                    <div className="feature-icon">🛠️</div>
-                    <div>
-                      <h4>Minimal Maintenance</h4>
-                      <p>Self-cleaning nozzles and automated diagnostics ensure 99.9% uptime</p>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="roi-calculator">
-                  <h3>Your ROI Breakdown</h3>
-                  <div className="roi-grid">
-                    <div className="roi-item">
-                      <span className="roi-label">Initial Investment</span>
-                      <span className="roi-value">£4,999</span>
-                    </div>
-                    <div className="roi-item">
-                      <span className="roi-label">Average Monthly Revenue</span>
-                      <span className="roi-value">£2,800</span>
-                    </div>
-                    <div className="roi-item">
-                      <span className="roi-label">Break-even Period</span>
-                      <span className="roi-value">1.8 Months</span>
-                    </div>
-                    <div className="roi-item highlight">
-                      <span className="roi-label">Annual Profit</span>
-                      <span className="roi-value">£28,600+</span>
-                    </div>
-                  </div>
-                  <button className="roi-calc-button" onClick={() => setShowROICalculator(true)}>
-                    Calculate Your Custom ROI
+              <div className="roi-calculator">
+                <h3>Your Income Calculator</h3>
+                <div className="calculator-toggle">
+                  <button 
+                    className={`toggle-btn ${calculatorMode === 'partnership' ? 'active' : ''}`}
+                    onClick={() => setCalculatorMode('partnership')}
+                  >
+                    Partnership (20%)
+                  </button>
+                  <button 
+                    className={`toggle-btn ${calculatorMode === 'ownership' ? 'active' : ''}`}
+                    onClick={() => setCalculatorMode('ownership')}
+                  >
+                    Ownership (100%)
                   </button>
                 </div>
+                
+                <div className="roi-grid">
+                  <div className="roi-item">
+                    <span className="roi-label">Initial Investment</span>
+                    <span className="roi-value">£{calculatorMode === 'partnership' ? '0' : '4,999'}</span>
+                  </div>
+                  <div className="roi-item">
+                    <span className="roi-label">Total Monthly Revenue</span>
+                    <span className="roi-value">£{roiResults.monthlyRevenue}</span>
+                  </div>
+                  <div className="roi-item highlight">
+                    <span className="roi-label">Your Monthly Income</span>
+                    <span className="roi-value">
+                      £{calculatorMode === 'partnership' ? roiResults.partnershipIncome : roiResults.monthlyProfit}
+                    </span>
+                  </div>
+                  <div className="roi-item highlight">
+                    <span className="roi-label">Annual Income</span>
+                    <span className="roi-value">
+                      £{calculatorMode === 'partnership' ? roiResults.yearlyIncome : roiResults.yearlyProfit}+
+                    </span>
+                  </div>
+                </div>
+                <button className="roi-calc-button" onClick={() => setShowROICalculator(true)}>
+                  Calculate Your Custom Income
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Enhanced Testimonials Section */}
       <section id="testimonials" className="testimonials-section">
         <div className="container mx-auto px-6 py-20">
           <div className="section-header">
-            <h2 className="section-title">Real Success Stories</h2>
-            <p className="section-subtitle">Join hundreds of successful ScentNGoo entrepreneurs earning passive income</p>
+            <h2 className="section-title">Success Stories From Our Partners & Owners</h2>
+            <p className="section-subtitle">Real businesses, real results, real profits from both business models</p>
           </div>
+          
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className={`testimonial-card ${testimonial.type}`}>
+                <div className="testimonial-type-badge">
+                  {testimonial.type === 'partnership' ? '🤝 Partnership' : '💼 Ownership'}
+                </div>
+                <div className="testimonial-header">
+                  <div className="testimonial-avatar">
+                    <div className="avatar-placeholder">
+                      <span className="avatar-initial">{testimonial.name.charAt(0)}</span>
+                    </div>
+                  </div>
+                  <div className="testimonial-info">
+                    <h4>{testimonial.name}</h4>
+                    <p>{testimonial.business}</p>
+                    <div className="stars">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <span key={i} className="star">⭐</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="revenue-highlight">
+                    <span className="revenue-amount">{testimonial.revenue}</span>
+                    <span className="revenue-label">
+                      {testimonial.type === 'partnership' ? 'Partnership Income' : 'Monthly Revenue'}
+                    </span>
+                  </div>
+                </div>
+                <div className="testimonial-content">
+                  <p>"{testimonial.text}"</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <div className="testimonial-container">
-            <div className="testimonial-card">
-              <div className="testimonial-header">
-                <div className="stars">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="star">⭐</span>
+      {/* FAQ Section */}
+      <section id="faq" className="faq-section">
+        <div className="container mx-auto px-6 py-20">
+          <div className="section-header">
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <p className="section-subtitle">Get answers to common questions about both business models</p>
+          </div>
+          
+          <div className="faq-content">
+            {faqData.map((category, categoryIndex) => (
+              <div key={categoryIndex} className="faq-category">
+                <h3 className="faq-category-title">{category.category}</h3>
+                <div className="faq-questions">
+                  {category.questions.map((item, questionIndex) => (
+                    <div key={questionIndex} className="faq-item">
+                      <h4 className="faq-question">{item.q}</h4>
+                      <p className="faq-answer">{item.a}</p>
+                    </div>
                   ))}
                 </div>
-                <div className="revenue-highlight">
-                  {testimonials[activeTestimonial].revenue}
-                </div>
               </div>
-              <p className="testimonial-text">
-                "{testimonials[activeTestimonial].text}"
-              </p>
-              <div className="testimonial-author">
-                <h4>{testimonials[activeTestimonial].name}</h4>
-                <p>{testimonials[activeTestimonial].business}</p>
-              </div>
-            </div>
-
-            <div className="testimonial-navigation">
-              <button onClick={prevTestimonial} className="nav-btn">←</button>
-              <div className="testimonial-dots">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`dot ${index === activeTestimonial ? 'active' : ''}`}
-                    onClick={() => setActiveTestimonial(index)}
-                  />
-                ))}
-              </div>
-              <button onClick={nextTestimonial} className="nav-btn">→</button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Investment Section */}
-      <section id="invest" className="investment-section">
-        <div className="investment-background">
-          <img src="https://images.unsplash.com/photo-1550859746-2f021fc95994?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGludmVzdG1lbnQlMjBwYXNzaXZlJTIwaW5jb21lfGVufDB8fHxibGFja3wxNzUxMTM3MDAwfDA&ixlib=rb-4.1.0&q=85" alt="Investment" className="investment-bg" />
-          <div className="investment-overlay"></div>
-        </div>
+      <section id="invest" className="invest-section">
         <div className="container mx-auto px-6 py-20">
-          <div className="investment-content">
-            <h2 className="investment-title">Start Your Fragrance Empire Today</h2>
-            <p className="investment-subtitle">
-              Join the exclusive ScentNGoo family and secure your financial future with proven passive income
-            </p>
-
-            <div className="investment-package">
-              <div className="package-header">
-                <h3>Complete Business Package</h3>
-                <div className="price">
-                  <span className="currency">£</span>
-                  <span className="amount">4,999</span>
-                  <span className="note">One-time investment</span>
-                </div>
-              </div>
-
-              <div className="package-includes">
-                <h4>Everything You Need to Start:</h4>
-                <div className="includes-grid">
-                  <div className="include-item">✅ Premium ScentNGoo Vending Machine</div>
-                  <div className="include-item">✅ 10 Luxury Fragrance Bottles (Initial Stock)</div>
-                  <div className="include-item">✅ Professional Installation & Setup</div>
-                  <div className="include-item">✅ Smart Monitoring App Access</div>
-                  <div className="include-item">✅ 1-Year Full Warranty</div>
-                  <div className="include-item">✅ 24/7 Technical Support</div>
-                  <div className="include-item">✅ Marketing Materials & Signage</div>
-                  <div className="include-item">✅ Business Training & Guidelines</div>
-                </div>
-              </div>
-
-              <div className="guarantee">
-                <div className="guarantee-badge">
-                  <span className="guarantee-icon">🛡️</span>
-                  <div>
-                    <h4>Revenue Guarantee</h4>
-                    <p>If you don't break even within 6 months, we'll refund 50% of your investment</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="investment-cta">
-                <button className="invest-button" onClick={() => setShowCart(true)}>Secure Your Machine Now - £4,999</button>
-                <p className="cta-note">Limited availability - Only 50 machines per region</p>
-              </div>
+          <div className="invest-content">
+            <div className="invest-header">
+              <h2 className="invest-title">Choose Your Path to Success</h2>
+              <p className="invest-subtitle">Start earning passive income today with either business model</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Support Section */}
-      <section className="support-section">
-        <div className="container mx-auto px-6 py-16">
-          <div className="support-content">
-            <h2>World-Class Support Every Step of the Way</h2>
-            <p>We don't just sell machines - we partner with you for long-term success</p>
             
-            <div className="support-grid">
-              <div className="support-item">
-                <div className="support-icon">🚀</div>
-                <h3>Launch Support</h3>
-                <p>Full setup, installation, and launch assistance to ensure immediate success</p>
-              </div>
-              <div className="support-item">
-                <div className="support-icon">📞</div>
-                <h3>24/7 Support</h3>
-                <p>Round-the-clock technical support and business consultation</p>
-              </div>
-              <div className="support-item">
-                <div className="support-icon">📈</div>
-                <h3>Growth Consulting</h3>
-                <p>Ongoing optimization advice to maximize your revenue potential</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ROI Calculator Modal */}
-      {showROICalculator && (
-        <div className="modal-overlay" onClick={() => setShowROICalculator(false)}>
-          <div className="modal-content roi-modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>ROI Calculator</h2>
-              <button className="close-btn" onClick={() => setShowROICalculator(false)}>×</button>
-            </div>
-            <div className="modal-body">
-              <div className="calculator-inputs">
-                <div className="input-group">
-                  <label>Location Type:</label>
-                  <select 
-                    value={roiInputs.location} 
-                    onChange={e => handleROIInputChange('location', e.target.value)}
-                    className="calculator-input"
-                  >
-                    <option value="gym">Fitness Center</option>
-                    <option value="pub">Pub/Bar</option>
-                    <option value="club">Nightclub</option>
-                    <option value="restaurant">Restaurant</option>
-                    <option value="hotel">Hotel</option>
-                  </select>
+            <div className="invest-options">
+              <div className="invest-option partnership-option">
+                <div className="option-badge">🏆 MOST POPULAR</div>
+                <h3>Partnership Model</h3>
+                <div className="option-price">£0 Investment</div>
+                <div className="option-income">Earn 20% Revenue Share</div>
+                
+                <div className="option-features">
+                  <div className="feature">✅ Zero upfront costs</div>
+                  <div className="feature">✅ Free installation & maintenance</div>
+                  <div className="feature">✅ Monthly passive income</div>
+                  <div className="feature">✅ No equipment responsibility</div>
+                  <div className="feature">✅ Guaranteed performance standards</div>
                 </div>
-                <div className="input-group">
-                  <label>Daily Foot Traffic:</label>
-                  <input 
-                    type="number" 
-                    value={roiInputs.footTraffic}
-                    onChange={e => handleROIInputChange('footTraffic', parseInt(e.target.value))}
-                    className="calculator-input"
-                    min="50"
-                    max="2000"
-                  />
-                </div>
-                <div className="input-group">
-                  <label>Price Per Spray (£):</label>
-                  <input 
-                    type="number" 
-                    value={roiInputs.pricePerSpray}
-                    onChange={e => handleROIInputChange('pricePerSpray', parseFloat(e.target.value))}
-                    className="calculator-input"
-                    min="1"
-                    max="10"
-                    step="0.5"
-                  />
-                </div>
-                <div className="input-group">
-                  <label>Operating Days Per Month:</label>
-                  <input 
-                    type="number" 
-                    value={roiInputs.operatingDays}
-                    onChange={e => handleROIInputChange('operatingDays', parseInt(e.target.value))}
-                    className="calculator-input"
-                    min="20"
-                    max="31"
-                  />
-                </div>
-              </div>
-              
-              <div className="calculator-results">
-                <h3>Your Projected Results</h3>
-                <div className="results-grid">
-                  <div className="result-item">
-                    <span className="result-label">Daily Users:</span>
-                    <span className="result-value">{roiResults.dailyUsers}</span>
-                  </div>
-                  <div className="result-item">
-                    <span className="result-label">Daily Revenue:</span>
-                    <span className="result-value">£{roiResults.dailyRevenue}</span>
-                  </div>
-                  <div className="result-item">
-                    <span className="result-label">Monthly Profit:</span>
-                    <span className="result-value">£{roiResults.monthlyProfit}</span>
-                  </div>
-                  <div className="result-item highlight">
-                    <span className="result-label">Annual Profit:</span>
-                    <span className="result-value">£{roiResults.yearlyProfit}</span>
-                  </div>
-                  <div className="result-item">
-                    <span className="result-label">Break-even:</span>
-                    <span className="result-value">{roiResults.breakEvenMonths} months</span>
-                  </div>
-                  <div className="result-item highlight">
-                    <span className="result-label">ROI:</span>
-                    <span className="result-value">{roiResults.roi}%</span>
-                  </div>
-                </div>
-                <button className="invest-now-btn" onClick={() => {setShowROICalculator(false); setShowCart(true);}}>
-                  Invest Now - £4,999
+                
+                <button className="option-cta-button" onClick={() => setShowPartnershipForm(true)}>
+                  Start Partnership Today
                 </button>
               </div>
+
+              <div className="invest-option ownership-option">
+                <div className="option-badge">💼 FULL CONTROL</div>
+                <h3>Ownership Model</h3>
+                <div className="option-price">£4,999 Investment</div>
+                <div className="option-income">Keep 100% of Profits</div>
+                
+                <div className="option-features">
+                  <div className="feature">✅ Own equipment outright</div>
+                  <div className="feature">✅ Maximum profit potential</div>
+                  <div className="feature">✅ 1-year warranty included</div>
+                  <div className="feature">✅ 30-day money back guarantee</div>
+                  <div className="feature">✅ Comprehensive training program</div>
+                </div>
+                
+                <button className="option-cta-button" onClick={() => setShowCart(true)}>
+                  Purchase Machine Now
+                </button>
+              </div>
+            </div>
+            
+            <div className="guarantee">
+              <p>🛡️ Both options include full support & maintenance guidance</p>
+              <p>📞 24/7 customer service for all partners and owners</p>
+              <p>📈 Average income targets achieved within 90 days</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced ROI Calculator Modal */}
+      {showROICalculator && (
+        <div className="modal-overlay" onClick={() => setShowROICalculator(false)}>
+          <div className="modal-content roi-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowROICalculator(false)}>×</button>
+            <h3>Calculate Your Custom Income</h3>
+            
+            <div className="calculator-mode-selector">
+              <button 
+                className={`mode-btn ${calculatorMode === 'partnership' ? 'active' : ''}`}
+                onClick={() => setCalculatorMode('partnership')}
+              >
+                Partnership Model (20% Share)
+              </button>
+              <button 
+                className={`mode-btn ${calculatorMode === 'ownership' ? 'active' : ''}`}
+                onClick={() => setCalculatorMode('ownership')}
+              >
+                Ownership Model (100% Profit)
+              </button>
+            </div>
+            
+            <div className="roi-inputs">
+              <div className="input-group">
+                <label>Location Type</label>
+                <select
+                  value={roiInputs.location}
+                  onChange={(e) => handleROIInputChange('location', e.target.value)}
+                >
+                  <option value="gym">Fitness Center</option>
+                  <option value="pub">Pub/Bar</option>
+                  <option value="club">Nightclub</option>
+                  <option value="restaurant">Restaurant</option>
+                  <option value="hotel">Hotel</option>
+                </select>
+              </div>
+              
+              <div className="input-group">
+                <label>Daily Foot Traffic</label>
+                <input
+                  type="number"
+                  value={roiInputs.footTraffic}
+                  onChange={(e) => handleROIInputChange('footTraffic', parseInt(e.target.value))}
+                  min="50"
+                  max="2000"
+                />
+              </div>
+              
+              <div className="input-group">
+                <label>Price per Spray (£)</label>
+                <input
+                  type="number"
+                  value={roiInputs.pricePerSpray}
+                  onChange={(e) => handleROIInputChange('pricePerSpray', parseFloat(e.target.value))}
+                  min="1"
+                  max="5"
+                  step="0.5"
+                />
+              </div>
+              
+              <div className="input-group">
+                <label>Operating Days per Month</label>
+                <input
+                  type="number"
+                  value={roiInputs.operatingDays}
+                  onChange={(e) => handleROIInputChange('operatingDays', parseInt(e.target.value))}
+                  min="20"
+                  max="31"
+                />
+              </div>
+            </div>
+            
+            <div className="roi-results">
+              <h4>Your Projected {calculatorMode === 'partnership' ? 'Partnership Income' : 'Ownership Returns'}</h4>
+              <div className="results-grid">
+                <div className="result-item">
+                  <span className="result-label">Daily Users</span>
+                  <span className="result-value">{roiResults.dailyUsers}</span>
+                </div>
+                <div className="result-item">
+                  <span className="result-label">Total Monthly Revenue</span>
+                  <span className="result-value">£{roiResults.monthlyRevenue}</span>
+                </div>
+                <div className="result-item highlight">
+                  <span className="result-label">Your Monthly Income</span>
+                  <span className="result-value">
+                    £{calculatorMode === 'partnership' ? roiResults.partnershipIncome : roiResults.monthlyProfit}
+                  </span>
+                </div>
+                <div className="result-item highlight">
+                  <span className="result-label">Annual Income</span>
+                  <span className="result-value">
+                    £{calculatorMode === 'partnership' ? roiResults.yearlyIncome : roiResults.yearlyProfit}
+                  </span>
+                </div>
+                {calculatorMode === 'ownership' && (
+                  <div className="result-item">
+                    <span className="result-label">Break-even Period</span>
+                    <span className="result-value">{roiResults.breakEvenMonths} months</span>
+                  </div>
+                )}
+                <div className="result-item">
+                  <span className="result-label">Initial Investment</span>
+                  <span className="result-value">£{roiResults.investment}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="modal-buttons">
+              <button className="roi-invest-button partnership" onClick={() => {
+                setShowROICalculator(false);
+                setShowPartnershipForm(true);
+              }}>
+                Start Partnership - FREE
+              </button>
+              <button className="roi-invest-button ownership" onClick={() => {
+                setShowROICalculator(false);
+                setShowCart(true);
+              }}>
+                Buy Machine - £4,999
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Cart Modal */}
-      {showCart && (
-        <div className="modal-overlay" onClick={() => setShowCart(false)}>
-          <div className="modal-content cart-modal" onClick={e => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Complete Your Purchase</h2>
-              <button className="close-btn" onClick={() => setShowCart(false)}>×</button>
-            </div>
-            <div className="modal-body">
-              <div className="cart-item">
-                <div className="item-details">
-                  <h3>ScentNGoo Premium Vending Machine</h3>
-                  <p>Complete business package with everything you need to start earning passive income</p>
-                  <ul className="cart-includes">
-                    <li>✅ Premium Vending Machine</li>
-                    <li>✅ 10 Luxury Fragrance Bottles</li>
-                    <li>✅ Professional Installation</li>
-                    <li>✅ Smart App Access</li>
-                    <li>✅ 1-Year Warranty</li>
-                    <li>✅ 24/7 Support</li>
-                  </ul>
-                </div>
-                <div className="item-price">
-                  <span className="price-amount">£4,999</span>
-                  <span className="price-note">One-time payment</span>
+      {/* Partnership Form Modal */}
+      {showPartnershipForm && (
+        <div className="modal-overlay" onClick={() => setShowPartnershipForm(false)}>
+          <div className="modal-content partnership-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowPartnershipForm(false)}>×</button>
+            <h3>🤝 Start Your Partnership Journey</h3>
+            
+            <div className="partnership-content">
+              <div className="partnership-info">
+                <div className="partnership-highlight">
+                  <h4>Partnership Benefits</h4>
+                  <div className="benefit-item">💰 Earn 20% of all sales revenue</div>
+                  <div className="benefit-item">🆓 Zero investment required</div>
+                  <div className="benefit-item">🔧 We handle all maintenance</div>
+                  <div className="benefit-item">📊 Monthly income reports</div>
+                  <div className="benefit-item">📱 Real-time performance tracking</div>
+                  <div className="benefit-item">🎯 Average income: £300-500+/month</div>
                 </div>
               </div>
               
-              <div className="payment-form">
-                <h3>Contact Information</h3>
-                <div className="form-grid">
-                  <input type="text" placeholder="Full Name" className="form-input" />
-                  <input type="email" placeholder="Email Address" className="form-input" />
-                  <input type="tel" placeholder="Phone Number" className="form-input" />
-                  <input type="text" placeholder="Company (Optional)" className="form-input" />
-                </div>
-                
-                <h3>Installation Address</h3>
-                <div className="form-grid">
-                  <input type="text" placeholder="Street Address" className="form-input full-width" />
-                  <input type="text" placeholder="City" className="form-input" />
-                  <input type="text" placeholder="Postal Code" className="form-input" />
-                </div>
-                
-                <div className="payment-total">
-                  <div className="total-line">
-                    <span>ScentNGoo Machine Package:</span>
-                    <span>£4,999.00</span>
+              <div className="contact-form">
+                <h4>Partnership Application</h4>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  alert('Thank you for your partnership interest! Our team will contact you within 24 hours to discuss location requirements and finalize your agreement.');
+                  setShowPartnershipForm(false);
+                }}>
+                  <div className="form-group">
+                    <input type="text" placeholder="Business Name" required />
                   </div>
-                  <div className="total-line">
-                    <span>Installation & Setup:</span>
-                    <span>Included</span>
+                  <div className="form-group">
+                    <input type="text" placeholder="Your Name" required />
                   </div>
-                  <div className="total-line">
-                    <span>Shipping:</span>
-                    <span>Free</span>
+                  <div className="form-group">
+                    <input type="email" placeholder="Email Address" required />
                   </div>
-                  <div className="total-line total">
-                    <span>Total:</span>
-                    <span>£4,999.00</span>
+                  <div className="form-group">
+                    <input type="tel" placeholder="Phone Number" required />
                   </div>
-                </div>
-                
-                <button className="checkout-btn">
-                  Proceed to Payment - £4,999
-                </button>
-                
-                <p className="payment-note">
-                  Secure payment processing. You'll be redirected to our payment partner to complete your purchase.
-                </p>
+                  <div className="form-group">
+                    <select required>
+                      <option value="">Select Business Type</option>
+                      <option value="gym">Fitness Center/Gym</option>
+                      <option value="pub">Pub/Bar</option>
+                      <option value="club">Nightclub</option>
+                      <option value="restaurant">Restaurant</option>
+                      <option value="hotel">Hotel</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <input type="text" placeholder="Business Location (City)" required />
+                  </div>
+                  <div className="form-group">
+                    <textarea placeholder="Estimated daily foot traffic and any additional information" rows="3"></textarea>
+                  </div>
+                  <button type="submit" className="submit-button partnership">
+                    🤝 Start Partnership - FREE
+                  </button>
+                </form>
               </div>
+            </div>
+            
+            <div className="partnership-footer">
+              <p>🔒 No commitment until final agreement</p>
+              <p>📞 Our team will contact you within 24 hours</p>
+              <p>⚡ Installation typically scheduled within 2 weeks</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Enhanced Cart Modal */}
+      {showCart && (
+        <div className="modal-overlay" onClick={() => setShowCart(false)}>
+          <div className="modal-content cart-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowCart(false)}>×</button>
+            <h3>💼 Complete Your Machine Purchase</h3>
+            
+            <div className="cart-content">
+              <div className="cart-item">
+                <img src="https://i.imgur.com/TpNRLbp.jpg" alt="ScentNGoo System" className="cart-item-image" />
+                <div className="cart-item-details">
+                  <h4>ScentNGoo Complete Ownership System</h4>
+                  <ul>
+                    <li>Premium 10-scent vending machine</li>
+                    <li>Professional installation & setup</li>
+                    <li>Smart app monitoring system</li>
+                    <li>Initial fragrance starter pack</li>
+                    <li>Comprehensive training program</li>
+                    <li>1-year warranty & support</li>
+                    <li>Marketing materials & signage</li>
+                  </ul>
+                  <div className="cart-price">£4,999</div>
+                  <div className="cart-roi">Expected ROI: 3-6 months</div>
+                </div>
+              </div>
+              
+              <div className="contact-form">
+                <h4>Purchase Information</h4>
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  alert('Thank you for your purchase interest! We will contact you within 24 hours to process your order and arrange installation.');
+                  setShowCart(false);
+                }}>
+                  <div className="form-group">
+                    <input type="text" placeholder="Full Name" required />
+                  </div>
+                  <div className="form-group">
+                    <input type="email" placeholder="Email Address" required />
+                  </div>
+                  <div className="form-group">
+                    <input type="tel" placeholder="Phone Number" required />
+                  </div>
+                  <div className="form-group">
+                    <input type="text" placeholder="Business Name" required />
+                  </div>
+                  <div className="form-group">
+                    <textarea placeholder="Installation Location & Any Special Requirements" rows="3"></textarea>
+                  </div>
+                  <button type="submit" className="submit-button ownership">
+                    💰 Secure Your Machine - £4,999
+                  </button>
+                </form>
+                
+                <div className="payment-options">
+                  <p>💳 Payment options available:</p>
+                  <ul>
+                    <li>Full payment: £4,999</li>
+                    <li>Finance option: £208/month (24 months)</li>
+                    <li>Lease-to-own: £275/month (18 months)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div className="cart-footer">
+              <p>🔒 Secure payment processing</p>
+              <p>📞 Our team will contact you within 24 hours</p>
+              <p>⚡ Installation typically scheduled within 2 weeks</p>
+              <p>🛡️ 30-day money-back guarantee</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Legal Modal */}
+      {showLegalModal && (
+        <div className="modal-overlay" onClick={() => setShowLegalModal(null)}>
+          <div className="modal-content legal-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowLegalModal(null)}>×</button>
+            <div className="legal-content">
+              <h2>{legalContent[showLegalModal].title}</h2>
+              <div dangerouslySetInnerHTML={{ __html: legalContent[showLegalModal].content }} />
             </div>
           </div>
         </div>
@@ -883,39 +1558,43 @@ function App() {
                 </div>
                 <span className="logo-text">ScentNGoo</span>
               </div>
-              <p>Transforming businesses into luxury fragrance empires with premium vending technology.</p>
+              <p>Transforming businesses into luxury fragrance success stories with two profitable business models.</p>
             </div>
             
             <div className="footer-section">
-              <h4>Quick Links</h4>
+              <h4>Business Models</h4>
               <ul>
-                <li><a href="#opportunity">Business Opportunity</a></li>
-                <li><a href="#product">Product Details</a></li>
-                <li><a href="#testimonials">Success Stories</a></li>
-                <li><a href="#invest">Investment</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowPartnershipForm(true); }}>Partnership Model</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowCart(true); }}>Ownership Model</a></li>
+                <li><a href="#business-models" onClick={() => scrollToSection('business-models')}>Compare Models</a></li>
+                <li><a href="#testimonials" onClick={() => scrollToSection('testimonials')}>Success Stories</a></li>
               </ul>
             </div>
             
             <div className="footer-section">
               <h4>Support</h4>
               <ul>
-                <li><a href="#">Customer Service</a></li>
-                <li><a href="#">Technical Support</a></li>
-                <li><a href="#">Business Consultation</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowPartnershipForm(true); }}>Customer Service</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('faq'); }}>Technical Support</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setShowROICalculator(true); }}>Income Calculator</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToSection('faq'); }}>FAQ</a></li>
               </ul>
             </div>
             
             <div className="footer-section">
               <h4>Contact</h4>
               <p>📧 scentngoo@gmail.com</p>
-              <p>📞 +44 (0) 7366626260 </p>
+              <p>📞 +44 (0) 7366626260</p>
               <p>🌐 www.scentngoo.com</p>
             </div>
           </div>
           
           <div className="footer-bottom">
-            <p>&copy; 2025 ScentNGoo. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>&copy; 2025 ScentNGoo. All rights reserved. | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowLegalModal('privacy'); }}> Privacy Policy</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowLegalModal('terms'); }}> Terms of Service</a> | 
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowLegalModal('refund'); }}> Refund Policy</a>
+            </p>
           </div>
         </div>
       </footer>
